@@ -1,5 +1,30 @@
 <div class="light-theme" style="height: 3000px">
-    <mat-card>
-      <mat-card-title>Hola</mat-card-title>
-    </mat-card>
+  <div class="slideshow_container">
+    <slideshow #slideshow (click)="onClick($event)"
+      [height]="'600px'"
+      [minHeight]="'200px'"
+      [autoPlay]="true"
+      [autoPlayInterval]="'5000'"
+      [showArrows]="true"
+      [imageUrls]="carouselSource"
+      [lazyLoad]="carouselSource?.length > 1"
+      [autoPlayWaitForLazyLoad]="true"
+      [showDots]="true"
+      [showCaptions]="false">
+    </slideshow>
   </div>
+  <ul class="banner">
+      <li routerLink="/" >
+        <a><img src="../../assets/home/find_your_gym_text2.jpg" /></a>
+      </li>
+      <li routerLink="/" >
+        <a><img src="../../assets/home/mancuernas_instalaciones.jpg" /></a>
+      </li>
+      <li routerLink="/" >
+        <a><img src="../../assets/home/escaleras_login.jpg" /></a>
+      </li>
+      <li routerLink="/" >
+        <a><img src="../../assets/home/shop_text.jpg" /></a>
+      </li>
+    </ul>
+</div>

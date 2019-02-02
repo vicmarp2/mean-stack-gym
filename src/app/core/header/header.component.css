@@ -1,7 +1,7 @@
 mat-toolbar.main-header {
   height: 100px;
   position: fixed;
-  z-index: 100;
+  z-index: 200;
   align-items: center
 }
 mat-toolbar.secondary-header {
@@ -10,6 +10,7 @@ mat-toolbar.secondary-header {
   position: fixed;
   z-index: 100;
   top: 100px;
+  /* background-color: rgba( 255, 255, 255, 0.5 ); */
   opacity: 0.5;
   align-items: center
 }

@@ -1,0 +1,41 @@
+<div class="dark-theme">
+  <mat-toolbar class="main-header" color="primary">
+    <mat-toolbar-row>
+      <a routerLink="/">HERCA</a>
+      <span class="spacer"></span>
+      <ul>
+        <li>
+          <a mat-button routerLink="/auth/login" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
+        </li>
+        <li>
+          <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">INSCRÍBETE</a>
+        </li>
+      </ul>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-toolbar class="secondary-header mat-elevation-z20" color="primary">
+    <mat-toolbar-row>
+      <ul>
+        <li routerLink="/gyms" routerLinkActive="active">
+          <a>CENTROS</a>
+        </li>
+        <li routerLink="/prices" routerLinkActive="active">
+          <a>CUOTAS</a>
+        </li>
+        <li routerLink="/tryfree" routerLinkActive="active">
+          <a>PRUEBA GRATIS</a>
+          </li>
+          <li routerLink="/activities" routerLinkActive="active">
+            <a>ACTIVIDADES</a>
+          </li>
+        <li routerLink="/courses" routerLinkActive="active">
+          <a>CURSOS</a>
+        </li>
+
+        <li routerLink="/shop/home" routerLinkActive="active">
+          <a>TIENDA</a>
+        </li>
+      </ul>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

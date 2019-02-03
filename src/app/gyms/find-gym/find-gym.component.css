@@ -1,0 +1,15 @@
+agm-map {
+  margin-top: 200px;
+  height: 500px;
+  min-height: 200px;
+  width: 50%;
+}
+
+
+a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+

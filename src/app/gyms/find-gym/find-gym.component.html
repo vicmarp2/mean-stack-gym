@@ -1,3 +1,19 @@
-<p>
-  find-gym works!
-</p>
+<agm-map [latitude]="mapLatitude" [longitude]="mapLongitude" [fullscreenControl]="true" [zoom]="mapZoom" [minZoom]="6">
+  <agm-marker *ngFor="let marker of mapMarkers" [latitude]="marker.gym.coordinates.latitude" [longitude]="marker.gym.coordinates.longitude"
+    [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)">
+    <agm-info-window (infoWindowClose)="onInfoWindowClosed()">
+      <h5>{{marker.gym.name | uppercase}}</h5>
+      <div>
+        <label style="font-weight: bold">Lunes a Viernes:&nbsp;</label>
+        <p style="display: inline">{{marker.gym.openingHours.mondayToFriday}}</p>
+      </div>
+      <div>
+        <label style="font-weight: bold">Sábados y Domingos:&nbsp;</label>
+        <p style="display: inline">{{marker.gym.openingHours.weekend}}</p>
+      </div>
+      <p>{{marker.gym.address}}</p>
+      <p>{{marker.gym.contactNumber}}</p>
+      <a mat-button>VER ESTE GIMNASIO</a>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>

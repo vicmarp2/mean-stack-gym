@@ -1,0 +1,32 @@
+<div class="dark-theme">
+  <mat-toolbar class="main-footer" color="primary">
+    <mat-toolbar-row class="first-row">
+      <ul>
+        <li>
+          <a mat-fab color="primary"><i class="fab fa-facebook-f fa-2x"></i></a>
+        </li>
+        <li>
+          <a mat-fab color="primary"><i class="fab fa-twitter fa-2x"></i></a>
+        </li>
+        <li>
+          <a mat-fab color="primary"><i class="fab fa-instagram fa-2x"></i></a>
+        </li>
+        <li>
+          <a mat-fab color="primary"><i class="fab fa-youtube fa-2x"></i></a>
+        </li>
+      </ul>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="second-row">
+      <ul>
+        <li *ngFor="let linkContainer of footerLinks; let i = index">
+          <a routerLink="{{linkContainer.link}}">{{linkContainer.title}}</a>
+          <span *ngIf="i < footerLinks.length - 1">/</span>
+        </li>
+      </ul>
+    </mat-toolbar-row>
+  <mat-toolbar-row  class="trademark">
+    <span class="spacer"></span>
+    <span> © 2019 Club Deportivo Herca, SL. Todos los derechos reservados</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

@@ -18,7 +18,7 @@ $light-theme: mat-light-theme($light-theme-primary, $light-theme-accent, $light-
 
 // Define an alternate dark theme.
 $dark-theme-primary: mat-palette($mat-teal, 900);
-$dark-theme-accent:  mat-palette($mat-amber,300);
+$dark-theme-accent:  mat-palette($mat-amber,100);
 $dark-theme-warn:    mat-palette($mat-red);
 $dark-theme:   mat-dark-theme($dark-theme-primary, $dark-theme-accent, $dark-theme-warn);
 

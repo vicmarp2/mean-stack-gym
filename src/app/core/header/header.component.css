@@ -70,9 +70,9 @@ mat-toolbar.secondary-header li:hover {
 
 a[mat-raised-button] {
   font-size: 20px;
-  background-color: red
-  /* background: white;
-  color: black; */
+  /* background-color: red */
+  background: white;
+  color: black;
 }
 
 

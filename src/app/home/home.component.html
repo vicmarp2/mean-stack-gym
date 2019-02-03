@@ -1,5 +1,5 @@
-<div class="light-theme" style="height: 3000px">
-  <div class="slideshow_container">
+<div class="light-theme black">
+  <div class="slideshow_container shadowed" style="width: 100%">
     <slideshow #slideshow (click)="onClick($event)"
       [height]="'600px'"
       [minHeight]="'200px'"
@@ -13,7 +13,7 @@
       [showCaptions]="false">
     </slideshow>
   </div>
-  <ul class="banner">
+  <ul class="banner shadowed">
       <li routerLink="/" >
         <a><img src="../../assets/home/find_your_gym_text2.jpg" /></a>
       </li>

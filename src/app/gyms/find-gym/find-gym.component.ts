@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GymsService } from '../gyms.service';
 import { Gym } from '../gym.model';
-import { ICON_REGISTRY_PROVIDER } from '@angular/material/icon';
 import { AgmMarker } from '@agm/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-find-gym',
@@ -26,7 +26,8 @@ export class FindGymComponent implements OnInit {
   gyms: Gym[];
 
   constructor(
-    public gymsService: GymsService
+    private gymsService: GymsService, private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -53,6 +54,10 @@ export class FindGymComponent implements OnInit {
     this.mapLatitude = 40;
     this.mapLongitude = -3;
     this.mapZoom = 6.3;
+  }
+
+  onGymSelected(gym: Gym) {
+    this.router.navigate([gym.codName]);
   }
 
 }

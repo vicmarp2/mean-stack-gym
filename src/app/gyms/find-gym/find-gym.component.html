@@ -1,19 +1,39 @@
-<agm-map [latitude]="mapLatitude" [longitude]="mapLongitude" [fullscreenControl]="true" [zoom]="mapZoom" [minZoom]="6">
-  <agm-marker *ngFor="let marker of mapMarkers" [latitude]="marker.gym.coordinates.latitude" [longitude]="marker.gym.coordinates.longitude"
-    [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)">
-    <agm-info-window (infoWindowClose)="onInfoWindowClosed()">
-      <h5>{{marker.gym.name | uppercase}}</h5>
-      <div>
-        <label style="font-weight: bold">Lunes a Viernes:&nbsp;</label>
-        <p style="display: inline">{{marker.gym.openingHours.mondayToFriday}}</p>
-      </div>
-      <div>
-        <label style="font-weight: bold">Sábados y Domingos:&nbsp;</label>
-        <p style="display: inline">{{marker.gym.openingHours.weekend}}</p>
-      </div>
-      <p>{{marker.gym.address}}</p>
-      <p>{{marker.gym.contactNumber}}</p>
-      <a mat-button>VER ESTE GIMNASIO</a>
-    </agm-info-window>
-  </agm-marker>
-</agm-map>
+<div class="light-theme container" fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="center space-evenly">
+
+
+  <div class="list-container" fxFlex="30%">
+     <mat-action-list>
+        <h3 mat-subheader>Encuentra tu gimnasio</h3>
+
+      <button mat-list-item *ngFor="let gym of gyms" (click)="onGymSelected(gym);">
+        <mat-icon matListIcon>fitness_center</mat-icon>
+        <h3 matLine style="text-align: left"> {{gym.name | uppercase}}
+          <button style="float: right; text-align: center" >IR <i class="fas fa-angle-right"></i></button>
+        </h3>
+      </button>
+    </mat-action-list>
+
+  </div>
+  <div class="map-container" fxFlex="grow">
+    <agm-map [latitude]="mapLatitude" [longitude]="mapLongitude" [fullscreenControl]="true" [zoom]="mapZoom" [minZoom]="6">
+      <agm-marker *ngFor="let marker of mapMarkers" [latitude]="marker.gym.coordinates.latitude" [longitude]="marker.gym.coordinates.longitude"
+        [iconUrl]="marker.icon" (markerClick)="onMarkerClick($event)">
+        <agm-info-window (infoWindowClose)="onInfoWindowClosed()">
+          <h5>{{marker.gym.name | uppercase}}</h5>
+          <div>
+            <label style="font-weight: bold">Lunes a Viernes:&nbsp;</label>
+            <p style="display: inline">{{marker.gym.openingHours.mondayToFriday}}</p>
+          </div>
+          <div>
+            <label style="font-weight: bold">Sábados y Domingos:&nbsp;</label>
+            <p style="display: inline">{{marker.gym.openingHours.weekend}}</p>
+          </div>
+          <p>{{marker.gym.address}}</p>
+          <p>{{marker.gym.contactNumber}}</p>
+          <a mat-button (click)="onGymSelected(marker.gym)">VER ESTE GIMNASIO</a>
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </div>
+
+</div>

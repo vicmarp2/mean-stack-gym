@@ -9,6 +9,7 @@ export class GymsService {
   // esto se guardará en la base de datos
   private gyms: Gym[] = [
     {
+      codName: 'VLC',
       name: 'Herca Valencia',
       address: 'Calle 2, Valencia',
       contactNumber: '612345678',
@@ -22,6 +23,7 @@ export class GymsService {
       }
     },
     {
+      codName: 'MD',
       name: 'Herca Madrid',
       address: 'Calle 2, Valencia',
       contactNumber: '612345678',
@@ -35,6 +37,7 @@ export class GymsService {
       }
     },
     {
+      codName: 'BRC',
       name: 'Herca Barcelona',
       address: 'Calle 2, Valencia',
       contactNumber: '612345678',

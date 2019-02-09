@@ -62,8 +62,10 @@ mat-toolbar.secondary-header a {
 }
 
 mat-toolbar.secondary-header li.active {
-  background-color: black
+  background-color: black;
+  font-weight: 900;
 }
+
 mat-toolbar.secondary-header li:hover {
   background-color: black
 }

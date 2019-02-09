@@ -1,0 +1,25 @@
+.container {
+  margin-top: 100px;
+  margin-bottom: 100px
+}
+
+.list-container {
+  display: block;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 500px;
+  border:1px solid silver ;
+}
+
+agm-map {
+  height: 500px;
+  min-height: 200px;
+}
+
+a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+

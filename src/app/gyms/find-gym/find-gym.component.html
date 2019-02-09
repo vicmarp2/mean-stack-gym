@@ -2,14 +2,15 @@
 
 
   <div class="list-container" fxFlex="30%">
-     <mat-action-list>
-        <h3 mat-subheader>Encuentra tu gimnasio</h3>
+    <mat-action-list>
+      <h3 mat-subheader>Encuentra tu gimnasio</h3>
 
       <button mat-list-item *ngFor="let gym of gyms" (click)="onGymSelected(gym);">
         <mat-icon matListIcon>fitness_center</mat-icon>
         <h3 matLine style="text-align: left"> {{gym.name | uppercase}}
-          <button style="float: right; text-align: center" >IR <i class="fas fa-angle-right"></i></button>
+          <button style="float: right; text-align: center">IR <i class="fas fa-angle-right"></i></button>
         </h3>
+        <mat-divider></mat-divider>
       </button>
     </mat-action-list>
 

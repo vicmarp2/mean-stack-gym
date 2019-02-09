@@ -11,11 +11,10 @@ import {
   MatPaginatorModule,
   MatDialogModule,
   MatIconModule,
+  MatSelectModule,
+  MatListModule,
+  MatDividerModule,
 } from '@angular/material';
-
-import { MatListModule } from '@angular/material/list';
-import { FacilitiesComponent } from './facilities/facilities.component';
-import { TimetablesComponent } from './timetables/timetables.component';
 
 @NgModule({
   exports: [
@@ -28,9 +27,10 @@ import { TimetablesComponent } from './timetables/timetables.component';
     MatPaginatorModule,
     MatDialogModule,
     MatIconModule,
+    MatDividerModule,
+    MatSelectModule,
     FlexLayoutModule,
     MatListModule,
-  ],
-  declarations: [FacilitiesComponent, TimetablesComponent]
+  ]
 })
 export class AngularMaterialModule {}

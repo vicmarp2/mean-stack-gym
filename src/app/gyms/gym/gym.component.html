@@ -1,3 +1,77 @@
-<p>
-  gym works!
-</p>
+<div class="light-theme container">
+  <h4>Selecciona tu gimnasio más cercano</h4>
+  <mat-form-field>
+    <mat-select placeholder="Gimnasio" [(value)]="selectedGym" (selectionChange)="onSelectionChange($event)">
+      <mat-option *ngFor="let gym of gyms" [value]="gym">
+        {{gym.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-divider></mat-divider>
+
+  <div class="intro-container" fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="center space-evenly">
+    <div class="info-container" fxFlex="30%">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon matListIcon>location_on</mat-icon>
+            {{selectedGym.address}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="margin-left: 30px">
+          {{selectedGym.contactNumber}}
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon matListIcon>access_time</mat-icon>
+            Horario de apertura
+          </mat-card-title>
+          <mat-card-subtitle>Lunes a Viernes</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content style="margin-left: 30px">
+          {{selectedGym.openingHours.mondayToFriday}}
+        </mat-card-content>
+        <mat-card-header>
+          <mat-card-subtitle>Fines de semana</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content style="margin-left: 30px">
+          {{selectedGym.openingHours.weekend}}
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon matListIcon>euro_symbol</mat-icon>
+              Cuotas
+            </mat-card-title>
+
+          </mat-card-header>
+          <mat-card-content style="margin-left: 30px">
+            Desde
+          </mat-card-content>
+          <mat-card-actions>
+              <button mat-button (click)="onQuotasClick()">VER CUOTAS</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="map-container" fxFlex="grow">
+      <agm-map [latitude]="mapLatitude" [longitude]="mapLongitude" [fullscreenControl]="true" [zoom]="mapZoom"
+        [minZoom]="14">
+        <agm-marker *ngFor="let marker of mapMarkers" [latitude]="marker.gym.coordinates.latitude" [longitude]="marker.gym.coordinates.longitude"
+          [iconUrl]="marker.icon">
+        </agm-marker>
+      </agm-map>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <app-timetables></app-timetables>
+
+  <mat-divider></mat-divider>
+
+  <app-facilities></app-facilities>
+</div>

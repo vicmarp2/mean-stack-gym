@@ -17,3 +17,7 @@ agm-map {
 mat-divider {
   margin: 20px 0;
 }
+
+mat-card {
+  margin: 10px 0;
+}

@@ -6,7 +6,7 @@ import { GymComponent } from './gym/gym.component';
 
 const gymsRoutes: Routes = [
   { path: '', component: FindGymComponent},
-  { path: ':gym', component: GymComponent}
+  { path: 'at/:gym', component: GymComponent}
 ];
 
 @NgModule({

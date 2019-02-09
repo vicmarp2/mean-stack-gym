@@ -14,6 +14,7 @@ import {
   MatSelectModule,
   MatListModule,
   MatDividerModule,
+  MatGridListModule,
 } from '@angular/material';
 
 @NgModule({
@@ -31,6 +32,7 @@ import {
     MatSelectModule,
     FlexLayoutModule,
     MatListModule,
+    MatGridListModule,
   ]
 })
 export class AngularMaterialModule {}

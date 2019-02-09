@@ -46,13 +46,13 @@ export class GymComponent implements OnInit {
         of(params.get('gym'))
       )
     ).subscribe((selectedGymCodName: string) => {
-      this.selectedGymCodName = selectedGymCodName;
-      this.selectedGym = this.gymsService.getGymByCodeName(this.selectedGymCodName);
-      this.mapLatitude = this.selectedGym.coordinates.latitude;
-      this.mapLongitude = this.selectedGym.coordinates.longitude;
-      this.fetchMapMarker();
-      console.log(this.selectedGymCodName);
-      console.log(this.selectedGym);
+      if (selectedGymCodName !== 'any') {
+        this.selectedGymCodName = selectedGymCodName;
+        this.selectedGym = this.gymsService.getGymByCodeName(this.selectedGymCodName);
+        this.mapLatitude = this.selectedGym.coordinates.latitude;
+        this.mapLongitude = this.selectedGym.coordinates.longitude;
+        this.fetchMapMarker();
+      }
     });
   }
 
@@ -67,7 +67,7 @@ export class GymComponent implements OnInit {
   }
 
   onSelectionChange(newGym: MatSelectChange) {
-    this.router.navigate(['gyms', newGym.value.codName]);
+    this.router.navigate(['gyms', 'at', newGym.value.codName]);
   }
 
   fetchMapMarker() {

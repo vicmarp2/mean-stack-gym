@@ -1,5 +1,6 @@
 <div class="light-theme container">
   <h4>Selecciona tu gimnasio más cercano</h4>
+
   <mat-form-field>
     <mat-select placeholder="Gimnasio" [(value)]="selectedGym" (selectionChange)="onSelectionChange($event)">
       <mat-option *ngFor="let gym of gyms" [value]="gym">
@@ -10,7 +11,7 @@
 
   <mat-divider></mat-divider>
 
-  <div class="intro-container" fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="center space-evenly">
+  <div *ngIf="selectedGym" class="intro-container" fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="center space-evenly">
     <div class="info-container" fxFlex="30%">
       <mat-card>
         <mat-card-header>
@@ -67,11 +68,11 @@
     </div>
   </div>
 
-  <mat-divider></mat-divider>
+  <mat-divider *ngIf="selectedGym" ></mat-divider>
 
-  <app-timetables></app-timetables>
+  <app-timetables *ngIf="selectedGym" ></app-timetables>
 
-  <mat-divider></mat-divider>
+  <mat-divider *ngIf="selectedGym" ></mat-divider>
 
   <app-facilities></app-facilities>
 </div>

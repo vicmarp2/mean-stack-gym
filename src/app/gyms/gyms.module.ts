@@ -7,11 +7,13 @@ import { AngularMaterialModule } from '../shared/angular-material.module';
 
 import { FindGymComponent} from './find-gym/find-gym.component';
 import { GymsRoutingModule} from './gyms-routing.module';
+import { GymComponent } from './gym/gym.component';
 
 
 @NgModule({
   declarations: [
     FindGymComponent,
+    GymComponent,
   ],
   imports: [
     CommonModule,

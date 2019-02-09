@@ -13,6 +13,9 @@ import { AngularMaterialModule } from './shared/angular-material.module';
 import { HeaderComponent } from './core/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './core/footer/footer.component';
+import { ActiviesComponent } from './activies/activies.component';
+import { ActivitiesComponent } from './activities/activities.component';
+import { ActivityComponent } from './activities/activity/activity.component';
 
 
 @NgModule({
@@ -21,6 +24,9 @@ import { FooterComponent } from './core/footer/footer.component';
     HeaderComponent,
     HomeComponent,
     FooterComponent,
+    ActiviesComponent,
+    ActivitiesComponent,
+    ActivityComponent,
   ],
   imports: [
     BrowserModule,

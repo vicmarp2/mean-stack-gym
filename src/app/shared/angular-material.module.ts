@@ -14,6 +14,8 @@ import {
 } from '@angular/material';
 
 import { MatListModule } from '@angular/material/list';
+import { FacilitiesComponent } from './facilities/facilities.component';
+import { TimetablesComponent } from './timetables/timetables.component';
 
 @NgModule({
   exports: [
@@ -28,6 +30,7 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     FlexLayoutModule,
     MatListModule,
-  ]
+  ],
+  declarations: [FacilitiesComponent, TimetablesComponent]
 })
 export class AngularMaterialModule {}

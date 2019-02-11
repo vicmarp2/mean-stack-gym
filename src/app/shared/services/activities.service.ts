@@ -12,6 +12,7 @@ export class ActivitiesService {
       id: 'Pilates',
       name: 'Pilates',
       description: '',
+      imageUrl: '',
       events: [
         {
         id: 'Pilates_1_9',
@@ -47,6 +48,7 @@ export class ActivitiesService {
       id: 'Boxeo',
       name: 'Boxeo',
       description: '',
+      imageUrl: '',
       events: [
         {
           id: 'Boxeo_1_19',
@@ -77,6 +79,20 @@ export class ActivitiesService {
           dayOfWeek: 4,
         },
       ]
+    },
+    {
+      id: 'Body Combat',
+      name: 'Body Combat',
+      description: '',
+      imageUrl: '',
+      events: []
+    },
+    {
+      id: 'TRX',
+      name: 'TRX',
+      description: '',
+      imageUrl: '',
+      events: [],
     }
   ];
 

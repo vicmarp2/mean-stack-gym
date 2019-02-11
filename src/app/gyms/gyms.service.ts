@@ -25,7 +25,7 @@ export class GymsService {
     {
       codName: 'MD',
       name: 'Herca Madrid',
-      address: 'Calle 2, Valencia',
+      address: 'Calle 2, Madrid',
       contactNumber: '612345678',
       openingHours: {
         mondayToFriday: '06:00-01:00',
@@ -39,7 +39,7 @@ export class GymsService {
     {
       codName: 'BRC',
       name: 'Herca Barcelona',
-      address: 'Calle 2, Valencia',
+      address: 'Calle 2, Barcelona',
       contactNumber: '612345678',
       openingHours: {
         mondayToFriday: '06:00-01:00',

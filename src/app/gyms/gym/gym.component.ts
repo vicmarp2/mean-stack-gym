@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { OverlayContainer } from '@angular/cdk/overlay';
 
 import { switchMap, map, tap } from 'rxjs/operators';
 import { GymsService } from '../gyms.service';
@@ -15,7 +14,6 @@ import { AgmMarker } from '@agm/core';
   styleUrls: ['./gym.component.css']
 })
 export class GymComponent implements OnInit {
-  theme = 'light-theme';
   selectedGymCodName: string;
   selectedGym: Gym;
   gyms: Gym[];
@@ -34,11 +32,10 @@ export class GymComponent implements OnInit {
   mapMarkers = new Array<{gym: Gym, icon: any}>();
 
   constructor(private gymsService: GymsService, private route: ActivatedRoute,
-    private router: Router, private overlayContainer: OverlayContainer) { }
+    private router: Router) { }
 
   ngOnInit() {
-    // se cambia el tema del overlay del select
-    this.overlayContainer.getContainerElement().classList.add(this.theme);
+
     this.gyms = this.gymsService.getGyms();
     // se obtiene el gimnasio de la ruta
     this.route.paramMap.pipe(
@@ -54,16 +51,6 @@ export class GymComponent implements OnInit {
         this.fetchMapMarker();
       }
     });
-  }
-
-  onThemeChange(theme: string) {
-    this.theme = theme;
-    const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
-    const themeClassesToRemove = Array.from(overlayContainerClasses).filter((item: string) => item.includes('-theme'));
-    if (themeClassesToRemove.length) {
-       overlayContainerClasses.remove(...themeClassesToRemove);
-    }
-    overlayContainerClasses.add(theme);
   }
 
   onSelectionChange(newGym: MatSelectChange) {

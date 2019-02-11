@@ -5,7 +5,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MatSelectChange } from '@angular/material';
-import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-activities',
@@ -14,18 +13,16 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 })
 export class ActivitiesComponent implements OnInit {
 
-  theme = 'light-theme';
 
   selectedGymCodName: string;
   selectedGym: Gym;
   gyms: Gym[];
 
   constructor(private gymsService: GymsService, private route: ActivatedRoute,
-    private router: Router, private overlayContainer: OverlayContainer) { }
+    private router: Router) { }
 
   ngOnInit() {
-     // se cambia el tema del overlay del select
-     this.overlayContainer.getContainerElement().classList.add(this.theme);
+
     this.gyms = this.gymsService.getGyms();
     // se obtiene el gimnasio de la ruta
     // this.route.paramMap.pipe(

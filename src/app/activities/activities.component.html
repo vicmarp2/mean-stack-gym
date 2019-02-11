@@ -1,3 +1,26 @@
-<p>
-  activities works!
-</p>
+<div class="light-theme container">
+
+    <!-- <h4>Selecciona tu gimnasio más cercano</h4>
+
+    <mat-form-field>
+      <mat-select placeholder="Gimnasio" [(value)]="selectedGym" (selectionChange)="onSelectionChange($event)">
+        <mat-option *ngFor="let gym of gyms" [value]="gym">
+          {{gym.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-divider></mat-divider> -->
+
+  <p>
+    activities works!
+  </p>
+
+    <mat-divider></mat-divider>
+
+    <app-timetables ></app-timetables>
+
+    <mat-divider ></mat-divider>
+
+    <app-facilities></app-facilities>
+  </div>

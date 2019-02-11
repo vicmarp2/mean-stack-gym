@@ -14,8 +14,8 @@ import { HeaderComponent } from './core/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { ActivitiesComponent } from './activities/activities.component';
-import { ActivityComponent } from './activities/activity/activity.component';
 import { CoursesComponent } from './courses/courses.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -25,7 +25,6 @@ import { CoursesComponent } from './courses/courses.component';
     HomeComponent,
     FooterComponent,
     ActivitiesComponent,
-    ActivityComponent,
     CoursesComponent,
   ],
   imports: [
@@ -34,6 +33,7 @@ import { CoursesComponent } from './courses/courses.component';
     BrowserAnimationsModule,
     SlideshowModule,
     AngularMaterialModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

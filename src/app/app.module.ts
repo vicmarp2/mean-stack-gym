@@ -16,6 +16,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { CoursesComponent } from './courses/courses.component';
 import { SharedModule } from './shared/shared.module';
+import { ShopComponent } from './shop/shop.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { SharedModule } from './shared/shared.module';
     FooterComponent,
     ActivitiesComponent,
     CoursesComponent,
+    ShopComponent,
   ],
   imports: [
     BrowserModule,

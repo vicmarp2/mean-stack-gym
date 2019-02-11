@@ -3,12 +3,14 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CoursesComponent } from './courses/courses.component';
 import { ActivitiesComponent } from './activities/activities.component';
+import { ShopComponent } from './shop/shop.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'gyms', loadChildren: './gyms/gyms.module#GymsModule'},
   {path: 'courses', component: CoursesComponent},
   {path: 'activities/at/:gym', component: ActivitiesComponent},
+  {path: 'shop', component: ShopComponent},
 ];
 
 @NgModule({

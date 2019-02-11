@@ -1,11 +1,24 @@
-
 <div class="light-theme container">
 
-    <p>
-        courses works!
-      </p>
 
-    <mat-divider ></mat-divider>
+  <h3>Apúntate a alguno de nuestros cursos</h3>
 
-    <app-facilities></app-facilities>
+  <div class="card-container" *ngFor="let course of courses">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{course.name}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{course.imageUrl}}" alt="{{course.name}}" />
+      <mat-card-content>
+        <p>
+          {{course.description}}
+        </p>
+      </mat-card-content>
+    </mat-card>
   </div>
+
+
+  <mat-divider></mat-divider>
+
+  <app-facilities></app-facilities>
+</div>

@@ -15,4 +15,14 @@ mat-divider {
 
 mat-card {
   margin: 10px 0;
+  overflow: hidden;
 }
+
+.card-container {
+  display: inline-flex;
+  padding: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 40%;
+}
+

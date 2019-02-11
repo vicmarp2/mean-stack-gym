@@ -5,6 +5,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MatSelectChange } from '@angular/material';
+import { Activity } from '../shared/models/activity.model';
+import { ActivitiesService } from '../shared/services/activities.service';
 
 @Component({
   selector: 'app-activities',
@@ -14,16 +16,15 @@ import { MatSelectChange } from '@angular/material';
 export class ActivitiesComponent implements OnInit {
 
 
-  selectedGymCodName: string;
-  selectedGym: Gym;
-  gyms: Gym[];
 
-  constructor(private gymsService: GymsService, private route: ActivatedRoute,
+  activities: Activity[];
+
+  constructor(private activitiesService: ActivitiesService, private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
 
-    this.gyms = this.gymsService.getGyms();
+    this.activities = this.activitiesService.getActivities();
     // se obtiene el gimnasio de la ruta
     // this.route.paramMap.pipe(
     //   switchMap((params: ParamMap) =>
@@ -35,10 +36,6 @@ export class ActivitiesComponent implements OnInit {
     //     this.selectedGym = this.gymsService.getGymByCodeName(this.selectedGymCodName);
     //   }
     // });
-  }
-
-  onSelectionChange(newGym: MatSelectChange) {
-    this.router.navigate(['activities', 'at', newGym.value.codName]);
   }
 
 }

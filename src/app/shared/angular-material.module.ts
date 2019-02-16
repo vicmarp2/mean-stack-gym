@@ -15,6 +15,17 @@ import {
   MatListModule,
   MatDividerModule,
   MatGridListModule,
+  MatFormField,
+  MatAutocompleteModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatRadioModule,
+  MatSlideToggleModule,
+  MatStepperModule,
+  MatTabsModule,
+  MatProgressBarModule,
+  MatSnackBarModule,
+  MatTooltipModule
 } from '@angular/material';
 
 @NgModule({
@@ -33,6 +44,17 @@ import {
     FlexLayoutModule,
     MatListModule,
     MatGridListModule,
+    MatFormField,
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    MatSlideToggleModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatTooltipModule
   ]
 })
 export class AngularMaterialModule {}

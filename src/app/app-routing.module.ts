@@ -11,6 +11,7 @@ const appRoutes: Routes = [
   {path: 'courses', component: CoursesComponent},
   {path: 'activities/at/:gym', component: ActivitiesComponent},
   {path: 'shop', component: ShopComponent},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

@@ -13,7 +13,7 @@
 
   <div *ngIf="selectedGym" class="intro-container" fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="center space-evenly">
     <div class="info-container" fxFlex="30%">
-      <mat-card>
+      <mat-card class="mat-elevation-z6">
         <mat-card-header>
           <mat-card-title>
             <mat-icon matListIcon>location_on</mat-icon>
@@ -24,7 +24,7 @@
           {{selectedGym.contactNumber}}
         </mat-card-content>
       </mat-card>
-      <mat-card>
+      <mat-card class="mat-elevation-z6">
         <mat-card-header>
           <mat-card-title>
             <mat-icon matListIcon>access_time</mat-icon>
@@ -42,7 +42,7 @@
           {{selectedGym.openingHours.weekend}}
         </mat-card-content>
       </mat-card>
-      <mat-card>
+      <mat-card class="mat-elevation-z6">
           <mat-card-header>
             <mat-card-title>
               <mat-icon matListIcon>euro_symbol</mat-icon>

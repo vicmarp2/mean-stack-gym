@@ -14,7 +14,7 @@
     <mat-divider></mat-divider> -->
 
     <div class="card-container" *ngFor="let activity of activities">
-        <mat-card>
+        <mat-card [ngClass]="{ 'mat-elevation-z24': hover }" (mouseout)="hover=false" (mouseover)="hover=true" >
           <mat-card-header>
             <mat-card-title>{{activity.name}}</mat-card-title>
           </mat-card-header>

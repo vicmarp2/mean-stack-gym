@@ -1,7 +1,7 @@
 <div class="light-theme container">
   <h4>Nuestras instalaciones</h4>
   <div class="card-container" *ngFor="let facilitieCard of facilitiesCards">
-    <mat-card>
+    <mat-card [ngClass]="{ 'mat-elevation-z24': hover }" (mouseout)="hover=false" (mouseover)="hover=true">
       <mat-card-header>
         <mat-card-title>{{facilitieCard.facilitieName}}</mat-card-title>
         <mat-card-subtitle>{{facilitieCard.shortDesc}}</mat-card-subtitle>

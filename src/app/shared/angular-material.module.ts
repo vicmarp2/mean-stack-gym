@@ -11,9 +11,11 @@ import {
   MatPaginatorModule,
   MatDialogModule,
   MatIconModule,
+  MatSelectModule,
+  MatListModule,
+  MatDividerModule,
+  MatGridListModule,
 } from '@angular/material';
-
-import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   exports: [
@@ -26,8 +28,11 @@ import { MatListModule } from '@angular/material/list';
     MatPaginatorModule,
     MatDialogModule,
     MatIconModule,
+    MatDividerModule,
+    MatSelectModule,
     FlexLayoutModule,
     MatListModule,
+    MatGridListModule,
   ]
 })
 export class AngularMaterialModule {}

@@ -57,7 +57,7 @@ export class FindGymComponent implements OnInit {
   }
 
   onGymSelected(gym: Gym) {
-    this.router.navigate([gym.codName]);
+    this.router.navigate(['at', gym.codName], {relativeTo: this.route});
   }
 
 }

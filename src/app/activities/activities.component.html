@@ -1,0 +1,37 @@
+<div class="light-theme container">
+
+  <h3>Disfruta de nuestra gran variedad de actividades dirigidas</h3>
+    <!-- <h4>Selecciona tu gimnasio más cercano</h4>
+
+    <mat-form-field>
+      <mat-select placeholder="Gimnasio" [(value)]="selectedGym" (selectionChange)="onSelectionChange($event)">
+        <mat-option *ngFor="let gym of gyms" [value]="gym">
+          {{gym.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-divider></mat-divider> -->
+
+    <div class="card-container" *ngFor="let activity of activities">
+        <mat-card [ngClass]="{ 'mat-elevation-z24': hover }" (mouseout)="hover=false" (mouseover)="hover=true" >
+          <mat-card-header>
+            <mat-card-title>{{activity.name}}</mat-card-title>
+          </mat-card-header>
+         <img mat-card-image src="{{activity.imageUrl}}" alt="{{activity.name}}"/>
+          <mat-card-content>
+            <p>
+              {{activity.description}}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    <mat-divider></mat-divider>
+
+    <app-timetables ></app-timetables>
+
+    <mat-divider ></mat-divider>
+
+    <app-facilities></app-facilities>
+  </div>

@@ -13,6 +13,10 @@ import { AngularMaterialModule } from './shared/angular-material.module';
 import { HeaderComponent } from './core/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './core/footer/footer.component';
+import { ActivitiesComponent } from './activities/activities.component';
+import { CoursesComponent } from './courses/courses.component';
+import { SharedModule } from './shared/shared.module';
+import { ShopComponent } from './shop/shop.component';
 
 
 @NgModule({
@@ -21,6 +25,9 @@ import { FooterComponent } from './core/footer/footer.component';
     HeaderComponent,
     HomeComponent,
     FooterComponent,
+    ActivitiesComponent,
+    CoursesComponent,
+    ShopComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +35,7 @@ import { FooterComponent } from './core/footer/footer.component';
     BrowserAnimationsModule,
     SlideshowModule,
     AngularMaterialModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

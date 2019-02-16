@@ -1,0 +1,23 @@
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  margin-top: 100px;
+  margin-bottom: 100px
+}
+
+agm-map {
+  height: 100%;
+  min-height: 200px;
+}
+
+mat-divider {
+  margin: 20px 0;
+}
+
+mat-card {
+  margin: 10px 0;
+}

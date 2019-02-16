@@ -7,11 +7,14 @@ import { AngularMaterialModule } from '../shared/angular-material.module';
 
 import { FindGymComponent} from './find-gym/find-gym.component';
 import { GymsRoutingModule} from './gyms-routing.module';
+import { GymComponent } from './gym/gym.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     FindGymComponent,
+    GymComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +23,7 @@ import { GymsRoutingModule} from './gyms-routing.module';
       apiKey : 'AIzaSyA2bsCQwBIZ-UEDOd5VmW3be6-q90L1lBY',
     }),
     GymsRoutingModule,
+    SharedModule
   ],
 })
 export class GymsModule { }

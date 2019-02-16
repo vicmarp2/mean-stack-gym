@@ -1,0 +1,73 @@
+@mixin theme-color-grabber($dark-theme){
+
+  $primary: map-get($dark-theme, primary);
+  $accent: map-get($dark-theme, accent);
+  $warn: map-get($dark-theme, warn);
+
+
+  .figure-container {
+    // Get the default hue for a palette.
+    background-color: mat-color($primary);
+  }
+
+  .figure-container > h4 {
+    color: mat-color($accent);
+  }
+
+  a {
+    text-decoration: none;
+    color:  mat-color($accent)!important;
+  }
+
+
+
+  mat-card {
+    margin: 10px 0;
+  }
+
+  /* img {
+    max-width: 400px;
+  } */
+
+  .card-container {
+    display: inline-flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 50%;
+  }
+
+  .figure-container {
+    display: block;
+    text-align: center;
+    width: 90%;
+    padding: 10px;
+  }
+
+  .figure-container > h3 {
+    font-weight: lighter;
+    color: white;
+  }
+
+
+  ul {
+    list-style: none;
+    text-align: left;
+    color: white;
+  }
+
+  .figure-container > ul li:before {
+    content: '✓';
+  }
+
+
+  mat-divider {
+    background-color: white!important;
+    margin: 5px
+  }
+}
+
+.container {
+  margin-top: 100px;
+  margin-bottom: 100px
+}

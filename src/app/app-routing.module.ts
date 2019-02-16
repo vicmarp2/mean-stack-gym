@@ -5,7 +5,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ShopComponent } from './shop/shop.component';
 import { QuotasComponent } from './quotas/quotas.component';
-import { TryfreeComponent } from './tryfree/tryfree.component';
+import { TryfreeComponent } from './auth/tryfree/tryfree.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 

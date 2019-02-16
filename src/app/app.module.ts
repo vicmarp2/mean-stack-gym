@@ -17,6 +17,7 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { CoursesComponent } from './courses/courses.component';
 import { SharedModule } from './shared/shared.module';
 import { ShopComponent } from './shop/shop.component';
+import { QuotasComponent } from './quotas/quotas.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ShopComponent } from './shop/shop.component';
     ActivitiesComponent,
     CoursesComponent,
     ShopComponent,
+    QuotasComponent,
   ],
   imports: [
     BrowserModule,

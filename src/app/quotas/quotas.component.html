@@ -1,0 +1,41 @@
+<div class="light-theme container">
+    <div class="card-container" *ngFor="let quota of quotasCards">
+      <figure class="figure-container mat-elevation-z15">
+        <h3>{{quota.title | uppercase}}</h3>
+        <mat-divider></mat-divider>
+        <h4>{{quota.pricePerMonth}} € MES</h4>
+        <ul>
+          <li>
+            Duración mínima: {{quota.periodInMonths}} {{quota.periodInMonths > 1 ? 'meses' : 'mes'}}
+          </li>
+          <li *ngIf="quota.isCardNeeded">
+            Cuota única de activación del carné: {{quota.cardPrice}} €
+          </li>
+          <li>
+            Pago {{quota.periodInMonths > 1 ? 'mediando adeudos domiciliados' : 'único con tarjeta bancaria'}}
+          </li>
+          <li>
+            Actividades dirigidas todos los días, lunes a domingo
+          </li>
+          <li>
+            Descuentos para participar en cursos deportivos
+          </li>
+          <li>
+            Duchas incluidas
+          </li>
+        </ul>
+        <a mat-button routerLink="auth/signup" >HAZTE SOCIO</a>
+      </figure>
+      <!-- <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{quota.pricePerMonth}}</mat-card-title>
+          <mat-card-subtitle>{{quota.periodInMonths}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            {{quota.numberOfPayments}}
+          </p>
+        </mat-card-content>
+      </mat-card> -->
+    </div>
+  </div>

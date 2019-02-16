@@ -5,6 +5,9 @@ import { CoursesComponent } from './courses/courses.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ShopComponent } from './shop/shop.component';
 import { QuotasComponent } from './quotas/quotas.component';
+import { TryfreeComponent } from './tryfree/tryfree.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -13,6 +16,9 @@ const appRoutes: Routes = [
   {path: 'quotas', component: QuotasComponent},
   {path: 'activities/at/:gym', component: ActivitiesComponent},
   {path: 'shop', component: ShopComponent},
+  {path: 'tryfree', component: TryfreeComponent},
+  {path: 'auth/login', component: LoginComponent},
+  {path: 'auth/signup', component: SignupComponent},
   {path: '**', redirectTo: ''}
 ];
 

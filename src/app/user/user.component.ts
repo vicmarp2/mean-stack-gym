@@ -5,6 +5,9 @@ import { of } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { DeregisterDialogComponent } from './deregister-dialog/deregister-dialog.component';
+import { Quota } from '../quotas/quota.model';
+import { QuotasService } from '../quotas/quotas.service';
+import { RenewDialogComponent } from './renew-dialog/renew-dialog.component';
 
 
 @Component({
@@ -39,11 +42,14 @@ export class UserComponent implements OnInit {
     iban: '5353453453',
   };
   startDate = new Date(1990, 0, 1);
+  quotas: Quota[];
+  selectedQuota: Quota;
 
-  constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog, private quotasService: QuotasService) { }
 
   ngOnInit() {
-    // se obtiene el gimnasio de la ruta
+
+    // se obtiene el usuario de la ruta
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         of(params.get('userId'))
@@ -51,6 +57,12 @@ export class UserComponent implements OnInit {
     ).subscribe((userId: string) => {
       if (userId) {
         this.user.userId = userId;
+      }
+    });
+
+    this.quotas = this.quotasService.getQuotas().filter((quota) => {
+      if (quota.periodInMonths > 0) {
+        return quota;
       }
     });
   }
@@ -61,6 +73,15 @@ export class UserComponent implements OnInit {
 
   openDeregisterDialog() {
     const dialogRef = this.dialog.open(DeregisterDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openRenewDialog() {
+    const dialogRef = this.dialog.open(RenewDialogComponent, {
+      data: {endDate : this.user.endDate, quota: this.selectedQuota}
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });

@@ -146,7 +146,15 @@
               </mat-panel-description>
               <mat-icon>euro_symbol</mat-icon>
             </mat-expansion-panel-header>
-            <p>I'm visible because I am open</p>
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Cuotas" ngModel name="quota" #quota [(ngModel)]="selectedQuota" required>
+                    <mat-option *ngFor="let quota of quotas" [value]="quota">
+                      {{quota.periodInMonths}} meses - {{quota.pricePerMonth}} € al mes
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+            <button mat-flat-button [disabled]="!selectedQuota" color="primary" type="button" (click)="openRenewDialog()">Contratar cuota</button>
+
           </mat-expansion-panel>
           <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>¿Deseas confirmar la contratación de {{data.quota.title}}?</h1>
+<div mat-dialog-content>
+  <p>El periódo comenzará el día {{data.endDate | date: 'shortDate'}} cuando termine tu última cuota contratada.</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" >Atrás</button>
+  <button mat-button  color="primary" (click)="onYesClick()" cdkFocusInitial >Confirmar</button>
+</div>

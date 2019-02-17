@@ -53,7 +53,7 @@ export class QuotasService {
   constructor(private router: Router) {}
 
   getQuotas() {
-    return this.quotas;
+    return [...this.quotas];
   }
 
 }

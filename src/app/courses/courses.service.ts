@@ -36,6 +36,6 @@ export class CoursesService {
   constructor() { }
 
   getCourses() {
-    return this.courses;
+    return [...this.courses];
   }
 }

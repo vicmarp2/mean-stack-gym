@@ -1,3 +1,21 @@
-<p>
-  login works!
-</p>
+<div class="container light-theme">
+  <mat-card class="card-container">
+    <mat-card-header>
+      <mat-card-title>INICIAR SESIÓN</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+  <form class="form-container" #loginForm="ngForm" (submit)="onLogin(loginForm)">
+    <mat-form-field class="full-width">
+      <input name="email" type="email" matInput ngModel placeholder="Email" #emailInput="ngModel" required email>
+      <mat-error *ngIf="emailInput.invalid">Inserte un email válido</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input name="password" type="password" matInput placeholder="Contraseña" ngModel #password="ngModel" required password>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">INICIAR SESIÓN</button>
+  </form>
+</mat-card-content>
+<mat-error style="text-align: left!important" *ngIf="isInvalid">Credenciales no válidas</mat-error>
+</mat-card>
+</div>

@@ -21,6 +21,8 @@ import { QuotasComponent } from './quotas/quotas.component';
 import { TryfreeComponent } from './auth/tryfree/tryfree.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -44,6 +46,9 @@ import { SignupComponent } from './auth/signup/signup.component';
     SlideshowModule,
     AngularMaterialModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

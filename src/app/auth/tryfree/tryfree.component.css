@@ -1,0 +1,32 @@
+.container {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+.form-container {
+  display: inline-block;
+  width: 50%;
+  align-content: center;
+}
+.full-width {
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+mat-divider {
+  margin: 20px 0;
+}
+
+img {
+  height: 200px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.card-container {
+  display: block;
+  padding: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}

@@ -70,35 +70,96 @@
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Personal data
+              Datos personales
             </mat-panel-title>
             <mat-panel-description>
-              Type your name and age
+              Modifica tus datos personales
             </mat-panel-description>
             <mat-icon>account_circle</mat-icon>
           </mat-expansion-panel-header>
 
-          <mat-form-field>
-            <input matInput placeholder="First name">
-          </mat-form-field>
+          <form class="second-form-group" #personalForm (submit)="onSubmitPersonalForm(personalForm)">
+              <ng-template matStepLabel>Rellena tus datos personales</ng-template>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Nombre" [(ngModel)]="user.name" disabled #nameInput="ngModel" name="name" required>
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Apellidos" #surname="ngModel" [(ngModel)]="user.surname" disabled name="surname" required>
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                  <input matInput placeholder="Email" disabled required value="{{user.email}}">
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input name="DNI" matInput placeholder="DNI" [(ngModel)]="user.dni" disabled #dniInput="ngModel" required pattern="(\d{8})([A-Z])">
+                    <mat-error *ngIf="dniInput.invalid">Inserte un DNI válido</mat-error>
+                  </mat-form-field>
+              <mat-form-field class="full-width">
+                  <input matInput placeholder="Nº de contacto" required [(ngModel)]="user.contactNumber" name="contactNumber" #numberInput="ngModel" pattern="(\d{9})">
+                  <mat-error *ngIf="numberInput.invalid">Inserte un número de teléfono de 9 dígitos</mat-error>
+                </mat-form-field>
+              <mat-form-field class="full-width">
+                <input name="birthdate" matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" [(ngModel)]="user.birthdate" #birthdate="ngModel" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="address">
+                <input matInput placeholder="Dirección" [(ngModel)]="user.address" #address="ngModel" name="address" required>
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Código postal" [(ngModel)]="user.postalCode" #postalCode="ngModel" name="postalCode" required>
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Ciudad" [(ngModel)]="user.city" #city="ngModel" name="city" required>
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit">Modificar</button>
 
-          <mat-form-field>
-            <input matInput placeholder="Age">
-          </mat-form-field>
+            </form>
         </mat-expansion-panel>
 
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Self aware panel
+              Cuenta bancaria
             </mat-panel-title>
             <mat-panel-description>
-              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+              Revisa tus datos bancarios
             </mat-panel-description>
-            <mat-icon>calendar_today</mat-icon>
+            <mat-icon>account_balance</mat-icon>
           </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
+          <form class="fourth-form-group">
+              <ng-template matStepLabel>Introduce datos de pago</ng-template>
+                  <mat-form-field class="full-width">
+                      <input name="IBAN" matInput placeholder="IBAN" [(ngModel)]="user.iban" #ibanInput="ngModel" required >
+                      <mat-error *ngIf="ibanInput.invalid">Inserte un IBAN válido</mat-error>
+                    </mat-form-field>
+            </form>
+            <button mat-raised-button color="primary" type="submit">Modificar</button>
         </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Renovación cuota
+              </mat-panel-title>
+              <mat-panel-description>
+                Renueva tu cuota
+              </mat-panel-description>
+              <mat-icon>euro_symbol</mat-icon>
+            </mat-expansion-panel-header>
+            <p>I'm visible because I am open</p>
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Bajas
+                </mat-panel-title>
+                <mat-panel-description>
+                  Darse de baja
+                </mat-panel-description>
+                <mat-icon>exit_to_app</mat-icon>
+              </mat-expansion-panel-header>
+              <button mat-flat-button color="warn" type="button" (click)="openDeregisterDialog()">Darse de baja</button>
+            </mat-expansion-panel>
       </mat-accordion>
     </mat-tab>
 

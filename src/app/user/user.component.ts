@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { DeregisterDialogComponent } from './deregister-dialog/deregister-dialog.component';
+
 
 @Component({
   selector: 'app-user',
@@ -34,7 +38,9 @@ export class UserComponent implements OnInit {
     city: 'Torrent, Valencia',
     iban: '5353453453',
   };
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  startDate = new Date(1990, 0, 1);
+
+  constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
     // se obtiene el gimnasio de la ruta
@@ -49,4 +55,16 @@ export class UserComponent implements OnInit {
     });
   }
 
+  onSubmitPersonalForm(form: NgForm) {
+    console.log(form);
+  }
+
+  openDeregisterDialog() {
+    const dialogRef = this.dialog.open(DeregisterDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }
+
+

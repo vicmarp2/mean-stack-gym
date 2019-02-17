@@ -8,6 +8,7 @@ import { QuotasComponent } from './quotas/quotas.component';
 import { TryfreeComponent } from './auth/tryfree/tryfree.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { UserComponent } from './user/user.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   {path: 'tryfree', component: TryfreeComponent},
   {path: 'auth/login', component: LoginComponent},
   {path: 'auth/signup', component: SignupComponent},
+  {path: 'user/:userId', component: UserComponent},
   {path: '**', redirectTo: ''}
 ];
 

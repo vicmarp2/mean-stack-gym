@@ -1,3 +1,113 @@
-<p>
-  user works!
-</p>
+<div class="light-theme container">
+  <mat-card class="card-container">
+    <mat-card-header>
+      <mat-card-title>INFORMACIÓN PERSONAL</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content-container">
+      <div class="row">
+        <label><b>CÓDIGO SOCIO:</b></label>
+        <pre>&#9;</pre>
+        <label>{{user.userId}}</label>
+        <pre>&#9;</pre>
+        <label><b>CUOTA:</b></label>
+        <pre>&#9;</pre>
+        <label>{{user.quota.title}}</label>
+        <pre>&#9;</pre>
+        <label><b>ESTADO:</b></label>
+        <pre>&#9;</pre>
+        <label>{{user.purchaseDate | date : 'shortDate'}}</label>
+
+      </div>
+      <div class="row">
+        <label><b>FECHA DE COMPRA:</b></label>
+        <pre>&#9;</pre>
+        <label>{{user.purchaseDate | date : 'shortDate'}}</label>
+        <pre>&#9;</pre>
+        <label><b>FECHA DE FIN:</b></label>
+        <pre>&#9;</pre>
+        <label>{{user.endDate | date : 'shortDate'}}</label>
+        <pre>&#9;</pre>
+        <label><b>EMAIL:</b></label>
+        <pre>&#9;</pre><label>{{user.email}}</label>
+        <pre>&#9;</pre>
+      </div>
+      <div class="row">
+        <label><b>NOMBRE COMPLETO:</b></label>
+        <pre>&#9;</pre><label>{{user.name}} {{user.surname}}</label>
+        <pre>&#9;</pre>
+        <label><b>DNI:</b></label>
+        <pre>&#9;</pre><label>{{user.dni}}</label>
+        <pre>&#9;</pre>
+        <label><b>Nº CONTACTO:</b></label>
+        <pre>&#9;</pre><label>{{user.contactNumber}}</label>
+
+      </div>
+      <div class="row">
+        <label><b>DIRECCIÓN:</b></label>
+        <pre>&#9;</pre><label>{{user.address}}</label>
+        <pre>&#9;</pre>
+        <label><b>CP:</b></label>
+        <pre>&#9;</pre><label>{{user.postalCode}}</label>
+        <pre>&#9;</pre>
+        <label><b>CIUDAD:</b></label>
+        <pre>&#9;</pre><label>{{user.city}}</label>
+
+      </div>
+      <div class="row">
+        <label><b>IBAN:</b></label>
+        <pre>&#9;</pre><label>{{user.iban}}</label>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-divider></mat-divider>
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">supervised_user_circle</mat-icon>
+        PERSONAL
+      </ng-template>
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Personal data
+            </mat-panel-title>
+            <mat-panel-description>
+              Type your name and age
+            </mat-panel-description>
+            <mat-icon>account_circle</mat-icon>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <input matInput placeholder="First name">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Age">
+          </mat-form-field>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Self aware panel
+            </mat-panel-title>
+            <mat-panel-description>
+              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+            <mat-icon>calendar_today</mat-icon>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">calendar_today</mat-icon>
+        RESERVA DE ACTIVIDADES
+      </ng-template>
+      Proximamente será posible reservar actividades desde aquí
+    </mat-tab>
+  </mat-tab-group>
+</div>

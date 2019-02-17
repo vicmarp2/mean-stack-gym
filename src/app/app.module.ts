@@ -24,6 +24,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './user/user.component';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 
 @NgModule({
@@ -52,7 +53,12 @@ import { UserComponent } from './user/user.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

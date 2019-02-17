@@ -24,7 +24,9 @@ import {
   MatTabsModule,
   MatProgressBarModule,
   MatSnackBarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 
 @NgModule({
@@ -52,7 +54,9 @@ import {
     MatTabsModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class AngularMaterialModule {}

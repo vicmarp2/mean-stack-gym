@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,12 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 export class AppComponent implements OnInit {
   theme = 'light-theme';
 
-  constructor(private overlayContainer: OverlayContainer) {}
+  constructor(private authService: AuthService, private overlayContainer: OverlayContainer) {}
 
   ngOnInit() {
-      // se cambia el tema del overlay del select
-      this.overlayContainer.getContainerElement().classList.add(this.theme);
+    this.authService.autoAuthUser();
+    // se cambia el tema del overlay del select
+    this.overlayContainer.getContainerElement().classList.add(this.theme);
   }
   onActivate() {
     window.scroll(0, 0);

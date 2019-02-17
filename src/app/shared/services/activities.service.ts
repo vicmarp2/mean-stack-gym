@@ -99,12 +99,12 @@ export class ActivitiesService {
   constructor(private router: Router) {}
 
   getActivities() {
-    return this.activities;
+    return [...this.activities];
   }
 
   getAllEvents() {
     const result: Activity['events'] = [];
-    this.activities.forEach((activity) => {
+    [...this.activities].forEach((activity) => {
       activity.events.forEach(event => {
         result.push(event);
       });

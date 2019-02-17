@@ -5,12 +5,18 @@
       </a>
       <span class="spacer"></span>
       <ul>
-        <li>
-          <a mat-button routerLink="/auth/login" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
+        <li *ngIf="!userIsAuth">
+          <a mat-button routerLink="/auth/login" (click)="userIsAuth=true" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
         </li>
-        <li>
+        <li *ngIf="userIsAuth">
+          <a mat-raised-button routerLink="/user/{{userId}}" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
+        </li>
+        <li *ngIf="!userIsAuth">
           <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">INSCRÍBETE</a>
         </li>
+        <li *ngIf="userIsAuth">
+            <a mat-button (click)="onLogout()">SALIR</a>
+          </li>
       </ul>
     </mat-toolbar-row>
   </mat-toolbar>

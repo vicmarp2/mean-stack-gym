@@ -1,0 +1,96 @@
+<div class="light-theme container">
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step>
+      <form class="first-form-group">
+        <ng-template matStepLabel>Inserta tu email</ng-template>
+        <mat-form-field class="full-width">
+          <input matInput type="email" placeholder="Email" email #emailInput="ngModel" name="email" ngModel required>
+          <mat-error *ngIf="emailInput.invalid">Inserte un email válido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput type="email" placeholder="Confirma email" email #confirmEmailInput="ngModel" name="confirmEmail"
+            ngModel required>
+          <mat-error *ngIf="confirmEmailInput.invalid">La confirmación es erronea</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext (click)="checkRegisterEmail(emailInput, stepper)" [disabled]="emailInput.invalid || confirmEmailInput.value!==emailInput.value">Continuar</button>
+        </div>
+        <mat-error *ngIf="alreadyExists">Este usuario ya está dado de alta</mat-error>
+      </form>
+    </mat-step>
+    <mat-step  >
+      <form class="second-form-group">
+        <ng-template matStepLabel>Rellena tus datos personales</ng-template>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nombre" ngModel #nameInput="ngModel" name="name" required>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Apellidos" #surname="ngModel" ngModel name="surname" required>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Email" disabled required value="{{emailInput.value}}">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+              <input name="DNI" matInput placeholder="DNI" ngModel #dniInput="ngModel" required pattern="(\d{8})([A-Z])">
+              <mat-error *ngIf="dniInput.invalid">Inserte un DNI válido</mat-error>
+            </mat-form-field>
+        <mat-form-field class="full-width">
+            <input matInput placeholder="contactNumber" required ngModel name="contactNumber" #numberInput="ngModel" pattern="(\d{9})">
+            <mat-error *ngIf="numberInput.invalid">Inserte un número de teléfono de 9 dígitos</mat-error>
+          </mat-form-field>
+        <mat-form-field class="full-width">
+          <input name="birthdate" matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" ngModel #birthdate="ngModel" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Dirección" ngModel #address="ngModel" name="address" required>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Código postal" ngModel #postalCode="ngModel" name="postalCode" required>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Ciudad" ngModel #city="ngModel" name="city" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperNext [disabled]="dniInput.invalid || numberInput.invalid || city.invalid || postalCode.invalid || address.invalid ||
+          birthdate.invalid || nameInput.invalid || surname.invalid ">Continuar</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step >
+        <form class="third-form-group">
+          <ng-template matStepLabel>Elige una de nuestras coutas</ng-template>
+          <mat-form-field class="full-width">
+              <mat-select placeholder="Cuotas" ngModel name="quota" #quota [(ngModel)]="selectedQuota" required>
+                  <mat-option *ngFor="let quota of quotas" [value]="quota">
+                    {{quota.periodInMonths}} meses - {{quota.pricePerMonth}} € al mes
+                  </mat-option>
+                </mat-select>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Atrás</button>
+            <button mat-button matStepperNext [disabled]="!selectedQuota" >Continuar</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step >
+          <form class="fourth-form-group">
+            <ng-template matStepLabel>Introduce datos de pago</ng-template>
+                <mat-form-field class="full-width" *ngIf="selectedQuota &amp;&amp; selectedQuota.periodInMonths === 1">
+                    <input name="creditCard" matInput placeholder="Tarjeta de crédito" ngModel #creditCardInput="ngModel" required >
+                    <mat-error *ngIf="creditCardInput.invalid">Inserte una tarjeta de crédito válida</mat-error>
+                  </mat-form-field>
+                <mat-form-field class="full-width" *ngIf="selectedQuota &amp;&amp; selectedQuota.periodInMonths > 1">
+                    <input name="IBAN" matInput placeholder="IBAN" ngModel #ibanInput="ngModel" required >
+                    <mat-error *ngIf="ibanInput.invalid">Inserte un IBAN válido</mat-error>
+                  </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Atrás</button>
+              <button mat-button (click)="onSignup()">Inscribirse</button>
+            </div>
+          </form>
+        </mat-step>
+  </mat-horizontal-stepper>
+</div>

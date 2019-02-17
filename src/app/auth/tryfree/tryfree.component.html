@@ -1,0 +1,34 @@
+<div class="light-theme container">
+  <div class="card-container">
+    <mat-card clas="mat-elevation-z24">
+      <mat-card-header>
+        <mat-card-title>¡Entrena 1 día gratis!</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image  src="../../../assets/rogue-bumpers.jpg" alt="¡Entrena 1 día gratis!"/>
+      <mat-card-content>
+        Rellena el formulario y podrás venir a entrenar 1 día a cualquiera de nuestros gimnasios durante la próxima semana. ¡No te quedes en casa!
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <form class="form-container" #tryfreeForm="ngForm" (submit)="onTryfree(tryfreeForm)">
+    <mat-form-field class="full-width">
+      <input matInput name="name" ngModel placeholder="Nombre" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput name="surname" ngModel placeholder="Apellidos" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input name="email" type="email" matInput ngModel placeholder="Email" #emailInput="ngModel" required email>
+      <mat-error *ngIf="emailInput.invalid">Inserte un email válido</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input name="DNI" matInput placeholder="DNI" ngModel #dniInput="ngModel" required pattern="(\d{8})([A-Z])">
+      <mat-error *ngIf="dniInput.invalid">Inserte un DNI válido</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Enviar</button>
+  </form>
+
+  <mat-divider></mat-divider>
+
+  <app-facilities></app-facilities>
+</div>

@@ -1,6 +1,6 @@
 <div class="light-theme black">
   <div class="slideshow_container shadowed" style="width: 100%">
-    <slideshow #slideshow (click)="onClick($event)"
+    <slideshow #slideshow (dblclick)="onClick($event)"
       [height]="'600px'"
       [minHeight]="'200px'"
       [autoPlay]="true"
@@ -20,7 +20,7 @@
       <li routerLink="/gyms/at/any" >
         <a><img src="../../assets/home/mancuernas_instalaciones.jpg" /></a>
       </li>
-      <li routerLink="/" >
+      <li routerLink="/auth/login" >
         <a><img src="../../assets/home/escaleras_login.jpg" /></a>
       </li>
       <li routerLink="/shop" >

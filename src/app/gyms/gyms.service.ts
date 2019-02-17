@@ -55,11 +55,11 @@ export class GymsService {
   constructor(private router: Router) {}
 
   getGyms() {
-    return this.gyms;
+    return [...this.gyms];
   }
 
   getGymByCodeName(codName: string): Gym {
-    const result: Gym = this.gyms.find(gym => {
+    const result: Gym = [...this.gyms].find(gym => {
      return gym.codName === codName;
     });
     return result;

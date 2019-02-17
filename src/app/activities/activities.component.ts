@@ -4,7 +4,6 @@ import { GymsService } from '../gyms/gyms.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { MatSelectChange } from '@angular/material';
 import { Activity } from '../shared/models/activity.model';
 import { ActivitiesService } from '../shared/services/activities.service';
 

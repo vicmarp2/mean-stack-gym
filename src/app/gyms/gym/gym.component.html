@@ -2,8 +2,8 @@
   <h4>Selecciona tu gimnasio más cercano</h4>
 
   <mat-form-field>
-    <mat-select placeholder="Gimnasio" [(value)]="selectedGym" (selectionChange)="onSelectionChange($event)">
-      <mat-option *ngFor="let gym of gyms" [value]="gym">
+    <mat-select placeholder="Gimnasio" [value]="selectedGym.codName" (selectionChange)="onSelectionChange($event)">
+      <mat-option *ngFor="let gym of gyms" [(value)]="gym.codName">
         {{gym.name}}
       </mat-option>
     </mat-select>

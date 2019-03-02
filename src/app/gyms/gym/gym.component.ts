@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 
 import { switchMap, map, tap } from 'rxjs/operators';
 import { GymsService } from '../gyms.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Gym } from '../gym.model';
 import { MatSelectChange } from '@angular/material';
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { AgmMarker } from '@agm/core';
 
 @Component({
@@ -13,7 +13,9 @@ import { AgmMarker } from '@agm/core';
   templateUrl: './gym.component.html',
   styleUrls: ['./gym.component.css']
 })
-export class GymComponent implements OnInit {
+export class GymComponent implements OnInit,  OnDestroy {
+  @ViewChild('matSelectedGym') matSelectedGym: any;
+
   selectedGymCodName: string;
   selectedGym: Gym;
   gyms: Gym[];
@@ -31,12 +33,17 @@ export class GymComponent implements OnInit {
 
   mapMarkers = new Array<{gym: Gym, icon: any}>();
 
+  private gymsSub: Subscription;
+
   constructor(private gymsService: GymsService, private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
-
-    this.gyms = this.gymsService.getGyms();
+    this.gymsService.getGyms();
+    this.gymsSub = this.gymsService.getGymsUpdateListener()
+      .subscribe(transformedGymData => {
+      this.gyms = transformedGymData.gyms;
+    });
     // se obtiene el gimnasio de la ruta
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
@@ -45,16 +52,23 @@ export class GymComponent implements OnInit {
     ).subscribe((selectedGymCodName: string) => {
       if (selectedGymCodName !== 'any') {
         this.selectedGymCodName = selectedGymCodName;
-        this.selectedGym = this.gymsService.getGymByCodeName(this.selectedGymCodName);
-        this.mapLatitude = this.selectedGym.coordinates.latitude;
-        this.mapLongitude = this.selectedGym.coordinates.longitude;
-        this.fetchMapMarker();
+        this.gymsService.getGymByCodeName(this.selectedGymCodName)
+          .subscribe(transformedGymData => {
+            // this.postsUpdated.next({
+            //   posts: [...this.posts],
+            //   postCount: transformedPostData.maxPosts
+            // });
+            this.selectedGym = transformedGymData.gym;
+            this.mapLatitude = this.selectedGym.coordinates.latitude;
+            this.mapLongitude = this.selectedGym.coordinates.longitude;
+            this.fetchMapMarker();
+          });
       }
     });
   }
 
   onSelectionChange(newGym: MatSelectChange) {
-    this.router.navigate(['gyms', 'at', newGym.value.codName]);
+    this.router.navigate(['gyms', 'at', newGym.value]);
   }
 
   fetchMapMarker() {
@@ -66,5 +80,10 @@ export class GymComponent implements OnInit {
 
   onQuotasClick() {
     this.router.navigate(['quotas']);
+  }
+
+  ngOnDestroy() {
+    this.gymsSub.unsubscribe();
+    // this.authStatusSub.unsubscribe();
   }
 }

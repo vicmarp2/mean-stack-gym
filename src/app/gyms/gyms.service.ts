@@ -2,66 +2,63 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Gym } from './gym.model';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
+const BACKEND_URL = environment.apiUrl + '/gyms';
 
 @Injectable({ providedIn: 'root' })
 export class GymsService {
-  // esto se guardará en la base de datos
-  private gyms: Gym[] = [
-    {
-      codName: 'VLC',
-      name: 'Herca Valencia',
-      address: 'Calle 2, Valencia',
-      contactNumber: '612345678',
-      openingHours: {
-        mondayToFriday: '06:00-01:00',
-        weekend: '07:00-23:00'
-      },
-      coordinates: {
-        latitude: 39.476645,
-        longitude: -0.355231,
-      }
-    },
-    {
-      codName: 'MD',
-      name: 'Herca Madrid',
-      address: 'Calle 2, Madrid',
-      contactNumber: '612345678',
-      openingHours: {
-        mondayToFriday: '06:00-01:00',
-        weekend: '07:00-23:00'
-      },
-      coordinates: {
-        latitude: 40.415666,
-        longitude: -3.711124,
-      }
-    },
-    {
-      codName: 'BRC',
-      name: 'Herca Barcelona',
-      address: 'Calle 2, Barcelona',
-      contactNumber: '612345678',
-      openingHours: {
-        mondayToFriday: '06:00-01:00',
-        weekend: '07:00-23:00'
-      },
-      coordinates: {
-        latitude: 41.381082,
-        longitude: 2.172335,
-      }
-    },
-  ];
+  constructor(private http: HttpClient, private router: Router) { }
 
-  constructor(private router: Router) {}
+  private gyms: Gym[] = [];
+  private gymsUpdated = new Subject<{ gyms: Gym[] }>();
 
   getGyms() {
-    return [...this.gyms];
+    return this.http
+      .get<{ message: string; gyms: any }>(
+        BACKEND_URL
+      )
+      .pipe(
+        map(gymsData => {
+          return {
+            gyms: gymsData.gyms.map(gyms => {
+              return {
+                id: gyms._id,
+                codName: gyms.codName,
+                name: gyms.name,
+                address: gyms.address,
+                contactNumber: gyms.contactNumber,
+                openingHours: gyms.openingHours,
+                coordinates: gyms.coordinates,
+              };
+            }),
+          };
+        })
+      )
+      .subscribe(transformedGymData => {
+        this.gyms = transformedGymData.gyms;
+        this.gymsUpdated.next({
+        gyms: [...this.gyms],
+      });
+    });
   }
 
-  getGymByCodeName(codName: string): Gym {
-    const result: Gym = [...this.gyms].find(gym => {
-     return gym.codName === codName;
-    });
-    return result;
+  getGymByCodeName(codName: string) {
+    return this.http
+      .get<{ message: string; gym: any }>(
+        `${BACKEND_URL}/${codName}`
+      )
+      .pipe(
+        map(gymData => {
+          return {
+            gym: gymData.gym,
+          };
+        }));
+  }
+
+  getGymsUpdateListener() {
+    return this.gymsUpdated.asObservable();
   }
 }

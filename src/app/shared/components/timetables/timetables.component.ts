@@ -87,24 +87,25 @@ export class TimetablesComponent implements OnInit {
   //     draggable: true
   //   },
 
-
-
   constructor(private activitiesService: ActivitiesService) {
     this.events = [];
    }
 
   ngOnInit() {
-    this.activityEvents = this.activitiesService.getAllEvents();
-    this.activityEvents.forEach((activityEvent) => {
-      const today = new Date();
-      this.events.push(
-        {
-          start: addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
-          end: addHours(addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
-          activityEvent.endHour - activityEvent.startHour),
-          title: activityEvent.activityName,
-        }
-      );
+    this.activitiesService.getAllEvents()
+      .subscribe(transformedEventData => {
+        this.activityEvents = transformedEventData.events;
+        this.activityEvents.forEach((activityEvent) => {
+          this.events.push(
+            {
+              start: addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
+              end: addHours(addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
+              activityEvent.endHour - activityEvent.startHour),
+              title: activityEvent.activityName,
+            }
+          );
+        });
+        this.refresh.next();
     });
   }
 

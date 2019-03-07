@@ -1,56 +1,57 @@
 <div class="light-theme container">
-  <mat-horizontal-stepper [linear]="isLinear" #stepper>
-    <mat-step>
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step >
       <form class="first-form-group">
-        <ng-template matStepLabel>Inserta tu email</ng-template>
+        <ng-template matStepLabel>Inserta tu email y contraseña</ng-template>
         <mat-form-field class="full-width">
-          <input matInput type="email" placeholder="Email" email #emailInput="ngModel" name="email" ngModel required>
+          <input matInput type="email" placeholder="Email" email #emailInput="ngModel" name="email" [(ngModel)]="userData.email" required>
           <mat-error *ngIf="emailInput.invalid">Inserte un email válido</mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-          <input matInput type="email" placeholder="Confirma email" email #confirmEmailInput="ngModel" name="confirmEmail"
-            ngModel required>
-          <mat-error *ngIf="confirmEmailInput.invalid">La confirmación es erronea</mat-error>
+          <input matInput type="password" placeholder="Contraseña" password #passwordInput="ngModel" name="password" [(ngModel)]="userData.password" required />
         </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput type="password" placeholder="Confirma contraseña" password #confirmPasswordInput="ngModel" name="confirmPassword" ngModel required />
+        </mat-form-field>
+        <mat-error *ngIf="alreadyExists === true">Este usuario ya está dado de alta</mat-error>
         <div>
-          <button mat-button matStepperNext (click)="checkRegisterEmail(emailInput, stepper)" [disabled]="emailInput.invalid || confirmEmailInput.value!==emailInput.value">Continuar</button>
+          <button mat-button matStepperNext (click)="checkRegisterEmail(emailInput.value, stepper)" [disabled]="emailInput.invalid || confirmPasswordInput.value!==passwordInput.value">Continuar</button>
         </div>
-        <mat-error *ngIf="alreadyExists">Este usuario ya está dado de alta</mat-error>
       </form>
     </mat-step>
-    <mat-step  >
+    <mat-step disabled >
       <form class="second-form-group">
         <ng-template matStepLabel>Rellena tus datos personales</ng-template>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Nombre" ngModel #nameInput="ngModel" name="name" required>
+          <input matInput placeholder="Nombre" [(ngModel)]="userData.name" #nameInput="ngModel" name="name" required>
         </mat-form-field>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Apellidos" #surname="ngModel" ngModel name="surname" required>
+          <input matInput placeholder="Apellidos" #surname="ngModel" [(ngModel)]="userData.surname" name="surname" required>
         </mat-form-field>
         <mat-form-field class="full-width">
             <input matInput placeholder="Email" disabled required value="{{emailInput.value}}">
           </mat-form-field>
           <mat-form-field class="full-width">
-              <input name="DNI" matInput placeholder="DNI" ngModel #dniInput="ngModel" required pattern="(\d{8})([A-Z])">
+              <input name="DNI" matInput placeholder="DNI" [(ngModel)]="userData.dni" #dniInput="ngModel" required pattern="(\d{8})([A-Z])">
               <mat-error *ngIf="dniInput.invalid">Inserte un DNI válido</mat-error>
             </mat-form-field>
         <mat-form-field class="full-width">
-            <input matInput placeholder="contactNumber" required ngModel name="contactNumber" #numberInput="ngModel" pattern="(\d{9})">
+            <input matInput placeholder="Nº de contacto" required [(ngModel)]="userData.contactNumber" name="contactNumber" #numberInput="ngModel" pattern="(\d{9})">
             <mat-error *ngIf="numberInput.invalid">Inserte un número de teléfono de 9 dígitos</mat-error>
           </mat-form-field>
         <mat-form-field class="full-width">
-          <input name="birthdate" matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" ngModel #birthdate="ngModel" required>
+          <input name="birthdate" matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" [(ngModel)]="userData.birthdate" #birthdate="ngModel" required>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Dirección" ngModel #address="ngModel" name="address" required>
+          <input matInput placeholder="Dirección" [(ngModel)]="userData.address" #address="ngModel" name="address" required>
         </mat-form-field>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Código postal" ngModel #postalCode="ngModel" name="postalCode" required>
+          <input matInput placeholder="Código postal" [(ngModel)]="userData.postalCode" #postalCode="ngModel" name="postalCode" required>
         </mat-form-field>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Ciudad" ngModel #city="ngModel" name="city" required>
+          <input matInput placeholder="Ciudad" [(ngModel)]="userData.city" #city="ngModel" name="city" required>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Atrás</button>
@@ -78,14 +79,12 @@
       <mat-step >
           <form class="fourth-form-group">
             <ng-template matStepLabel>Introduce datos de pago</ng-template>
-                <mat-form-field class="full-width" *ngIf="selectedQuota &amp;&amp; selectedQuota.periodInMonths === 1">
-                    <input name="creditCard" matInput placeholder="Tarjeta de crédito" ngModel #creditCardInput="ngModel" required >
-                    <mat-error *ngIf="creditCardInput.invalid">Inserte una tarjeta de crédito válida</mat-error>
-                  </mat-form-field>
-                <mat-form-field class="full-width" *ngIf="selectedQuota &amp;&amp; selectedQuota.periodInMonths > 1">
-                    <input name="IBAN" matInput placeholder="IBAN" ngModel #ibanInput="ngModel" required >
+                <mat-form-field class="full-width">
+                    <input name="IBAN" matInput placeholder="IBAN" [(ngModel)]="userData.iban" #ibanInput="ngModel" required >
                     <mat-error *ngIf="ibanInput.invalid">Inserte un IBAN válido</mat-error>
                   </mat-form-field>
+                  <mat-error *ngIf="userProblem">Revise los datos. Falta alguno o es incorrecto</mat-error>
+                  <mat-error *ngIf="alreadyExists === true">Este usuario ya está dado de alta</mat-error>
             <div>
               <button mat-button matStepperPrevious>Atrás</button>
               <button mat-button (click)="onSignup()">Inscribirse</button>

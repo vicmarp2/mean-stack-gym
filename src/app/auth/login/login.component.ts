@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    this.isInvalid = false;
     this.route.queryParamMap.pipe(
       switchMap((params: ParamMap) =>
         of(params.get('auth'))
@@ -28,7 +29,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
-    this.isInvalid = false;
     if (form.invalid) {
       return;
     }

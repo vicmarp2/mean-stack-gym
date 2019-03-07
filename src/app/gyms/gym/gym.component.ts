@@ -7,6 +7,8 @@ import { Gym } from '../gym.model';
 import { MatSelectChange } from '@angular/material';
 import { of, Subscription } from 'rxjs';
 import { AgmMarker } from '@agm/core';
+import { QuotasService } from 'src/app/quotas/quotas.service';
+import { Quota } from 'src/app/quotas/quota.model';
 
 @Component({
   selector: 'app-gym',
@@ -34,12 +36,29 @@ export class GymComponent implements OnInit,  OnDestroy {
   mapMarkers = new Array<{gym: Gym, icon: any}>();
 
   private gymsSub: Subscription;
-
-  constructor(private gymsService: GymsService, private route: ActivatedRoute,
+  private quotasSub: Subscription;
+  quotas: Quota[];
+  minQuota: Quota;
+  constructor(private gymsService: GymsService, private quotasService: QuotasService, private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
     this.gymsService.getGyms();
+    this.quotasService.getQuotas();
+    this.quotasSub = this.quotasService.getQuotasUpdateListener()
+    .subscribe(transformedQuotasData => {
+      this.quotas = transformedQuotasData.quotas.filter((quota) => {
+        if (quota.periodInMonths !== 0) {
+          return quota;
+        }
+      });
+      this.minQuota = this.quotas[0];
+      this.quotas.forEach(quota => {
+        if (quota.pricePerMonth < this.minQuota.pricePerMonth) {
+          this.minQuota = quota;
+        }
+      });
+    });
     this.gymsSub = this.gymsService.getGymsUpdateListener()
       .subscribe(transformedGymData => {
       this.gyms = transformedGymData.gyms;
@@ -84,6 +103,7 @@ export class GymComponent implements OnInit,  OnDestroy {
 
   ngOnDestroy() {
     this.gymsSub.unsubscribe();
+    this.quotasSub.unsubscribe();
     // this.authStatusSub.unsubscribe();
   }
 }

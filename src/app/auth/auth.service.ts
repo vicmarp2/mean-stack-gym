@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { User } from './models/user.model';
+import { map } from 'rxjs/operators';
 
+const BACKEND_URL = environment.apiUrl + '/users';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +17,7 @@ export class AuthService {
   private tokenTimer: any;
   private userId: string;
   private authStatusListener = new Subject<boolean>();
+
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -32,48 +37,57 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  // createUser(email: string, password: string) {
-  //   const authData: AuthData = { email: email, password: password };
-  //   this.http.post(BACKEND_URL + "/signup", authData).subscribe(
-  //     () => {
-  //       this.router.navigate(["/"]);
-  //     },
-  //     error => {
-  //       this.authStatusListener.next(false);
-  //     }
-  //   );
-  // }
+  createUser(user: User) {
+    this.http.post<{message: string; user: any }>(BACKEND_URL + '/signup', user)
+    .subscribe(
+      (result) => {
+        this.login(user.email, user.password);
+      },
+      error => {
+        this.authStatusListener.next(false);
+      }
+    );
+  }
+
+  checkDuplicatedUser(email: string) {
+    return this.http.post<{duplicated: boolean}>(BACKEND_URL + '/duplicate', {email})
+      .pipe(
+        map(data => {
+          return data.duplicated;
+        })
+      );
+  }
 
   login(email: string, password: string) {
-    // this.http
-    //   .post<{ token: string; expiresIn: number; userId: string }>(
-    //     BACKEND_URL + "/login",
-    //     authData
-    //   )
-    //   .subscribe(
-    //     response => {
-    //       const token = response.token;
-    //       this.token = token;
-    //       if (token) {
-    //         const expiresInDuration = response.expiresIn;
-    //         this.setAuthTimer(expiresInDuration);
-    //         this.isAuthenticated = true;
-    //         this.userId = response.userId;
-    //         this.authStatusListener.next(true);
-    //         const now = new Date();
-    //         const expirationDate = new Date(
-    //           now.getTime() + expiresInDuration * 1000
-    //         );
-    //         console.log(expirationDate);
-    //         this.saveAuthData(token, expirationDate, this.userId);
-    //         this.router.navigate([`/client/${this.userId}`]);
-    //       }
-    //     },
-    //     error => {
-    //       this.authStatusListener.next(false);
-    //     }
-    //   );
-    this.router.navigate(['auth/login'], { queryParams: { auth: 'invalid'}});
+    this.http
+      .post<{ token: string; expiresIn: number; userId: string }>(
+        BACKEND_URL + '/login',
+        {email, password}
+      )
+      .subscribe(
+        response => {
+          const token = response.token;
+          this.token = token;
+          if (token) {
+            const expiresInDuration = response.expiresIn;
+            this.setAuthTimer(expiresInDuration);
+            this.isAuthenticated = true;
+            this.userId = response.userId;
+            this.authStatusListener.next(true);
+            const now = new Date();
+            const expirationDate = new Date(
+              now.getTime() + expiresInDuration * 1000
+            );
+            console.log(expirationDate);
+            this.saveAuthData(token, expirationDate, this.userId);
+            this.router.navigate([`/user/${this.userId}`]);
+          }
+        },
+        error => {
+          this.authStatusListener.next(false);
+          this.router.navigate(['auth/login'], { queryParams: { auth: 'invalid'}});
+        }
+      );
   }
 
   autoAuthUser() {

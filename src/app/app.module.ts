@@ -22,9 +22,10 @@ import { TryfreeComponent } from './auth/tryfree/tryfree.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserComponent } from './user/user.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { showError: true }
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

@@ -4,6 +4,9 @@ import { MatStepper } from '@angular/material';
 import { Quota } from 'src/app/quotas/quota.model';
 import { QuotasService } from 'src/app/quotas/quotas.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { User } from '../models/user.model';
+import { addMonths } from 'date-fns';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +14,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit, OnDestroy {
-  isLinear = false;
+  isLinear = true;
   alreadyExists = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -20,9 +23,11 @@ export class SignupComponent implements OnInit, OnDestroy {
   startDate = new Date(1990, 0, 1);
   quotas: Quota[];
   selectedQuota: Quota;
+  userData: any = {};
   private quotasSub: Subscription;
+  userProblem = false;
 
-  constructor(private formBuilder: FormBuilder, private quotasService: QuotasService) { }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private quotasService: QuotasService) { }
 
   ngOnInit() {
     this.quotasService.getQuotas();
@@ -35,31 +40,64 @@ export class SignupComponent implements OnInit, OnDestroy {
       });
     });
     this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required],
+      firstCtrl: [null, Validators.required],
     });
     this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      secondCtrl: [null, Validators.required]
     });
     this.thirdFormGroup = this.formBuilder.group({
-      thirdCtrl: ['', Validators.required]
+      thirdCtrl: [null, Validators.required]
     });
     this.fourthFormGroup = this.formBuilder.group({
-      fourthCtrl: ['', Validators.required]
+      fourthCtrl: [null, Validators.required]
     });
   }
 
-  checkRegisterEmail(email: NgForm, stepper: MatStepper) {
+  checkRegisterEmail(email: string, stepper: MatStepper) {
     this.alreadyExists = false;
-
-    //todo acceder al authservice
-    this.alreadyExists = false;
-    if (this.alreadyExists) {
-      stepper.previous();
-    }
+    this.authService.checkDuplicatedUser(email)
+      .subscribe((duplicated) => {
+          this.alreadyExists = duplicated;
+          if (duplicated) {
+            stepper.previous();
+          }
+        }
+      );
   }
 
   onSignup() {
-    //
+    this.authService.checkDuplicatedUser(this.userData.email)
+      .subscribe((duplicated) => {
+          this.alreadyExists = duplicated;
+          if (duplicated) {
+            return;
+          }
+        }
+      );
+    this.userProblem = false;
+    const user = new User(
+     'not-yet',
+      this.userData.dni,
+      this.userData.email,
+      this.userData.password,
+      this.userData.name,
+      this.userData.surname,
+      this.selectedQuota,
+      new Date(),
+      addMonths(new Date(), this.selectedQuota.periodInMonths),
+      this.userData.contactNumber,
+      this.userData.birthdate,
+      this.userData.address,
+      this.userData.postalCode,
+      this.userData.city,
+      this.userData.iban,
+      );
+    if (!(user.dni && user.email && user.name && user.surname && user.password && user.quota && user.purchaseDate && user.endDate &&
+      user.contactNumber && user.birthdate && user.address && user.postalCode && user.city && user.iban)) {
+        this.userProblem = true;
+        return;
+      }
+    this.authService.createUser(user);
   }
 
   ngOnDestroy() {

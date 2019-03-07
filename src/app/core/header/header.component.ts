@@ -8,25 +8,25 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  userIsAuth = true;
-  userId: string = 'dddd';
+  userIsAuth = false;
+  userId: string;
   private authListener: Subscription;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    // this.userIsAuth = this.authService.getIsAuth();
-    // this.userId = this.authService.getUserId();
-    // this.authListener = this.authService
-    //   .getAuthStatusListener()
-    //   .subscribe(isAuthenticated => {
-    //     this.userIsAuth = isAuthenticated;
-    //     this.userId = this.authService.getUserId();
-    //   });
+    this.userIsAuth = this.authService.getIsAuth();
+    this.userId = this.authService.getUserId();
+    this.authListener = this.authService
+      .getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        console.log(this.userIsAuth);
+        this.userIsAuth = isAuthenticated;
+        this.userId = this.authService.getUserId();
+      });
   }
 
   onLogout() {
   this.authService.logout();
-  this.userIsAuth = false;
   }
 
   ngOnDestroy() {

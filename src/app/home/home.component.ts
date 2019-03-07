@@ -31,6 +31,5 @@ export class HomeComponent implements OnInit {
       case 1: this.router.navigate(['/activities/at/any']); break;
       case 2: this.router.navigate(['/tryfree']);
     }
-    console.log(this.slideShow.slideIndex);
   }
 }

@@ -25,6 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './user/user.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { DeregisterDialogComponent } from './user/deregister-dialog/deregister-dialog.component';
+import { RenewDialogComponent } from './user/renew-dialog/renew-dialog.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     LoginComponent,
     SignupComponent,
     UserComponent,
+    DeregisterDialogComponent,
+    RenewDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,10 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
       useValue: { showError: true }
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DeregisterDialogComponent,
+    RenewDialogComponent,
+  ]
 })
 export class AppModule { }

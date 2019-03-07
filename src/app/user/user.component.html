@@ -1,3 +1,182 @@
-<p>
-  user works!
-</p>
+<div class="light-theme container">
+  <mat-card class="card-container">
+    <mat-card-header>
+      <mat-card-title>INFORMACIÓN PERSONAL</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content-container">
+      <div class="row">
+        <label><b>CÓDIGO SOCIO:</b></label>
+        <pre>&#9;</pre>
+        <label>{{user.userId}}</label>
+        <pre>&#9;</pre>
+        <label><b>CUOTA:</b></label>
+        <pre>&#9;</pre>
+        <label>{{user.quota.title}}</label>
+        <pre>&#9;</pre>
+        <label><b>ESTADO:</b></label>
+        <pre>&#9;</pre>
+        <label>{{user.purchaseDate | date : 'shortDate'}}</label>
+
+      </div>
+      <div class="row">
+        <label><b>FECHA DE COMPRA:</b></label>
+        <pre>&#9;</pre>
+        <label>{{user.purchaseDate | date : 'shortDate'}}</label>
+        <pre>&#9;</pre>
+        <label><b>FECHA DE FIN:</b></label>
+        <pre>&#9;</pre>
+        <label>{{user.endDate | date : 'shortDate'}}</label>
+        <pre>&#9;</pre>
+        <label><b>EMAIL:</b></label>
+        <pre>&#9;</pre><label>{{user.email}}</label>
+        <pre>&#9;</pre>
+      </div>
+      <div class="row">
+        <label><b>NOMBRE COMPLETO:</b></label>
+        <pre>&#9;</pre><label>{{user.name}} {{user.surname}}</label>
+        <pre>&#9;</pre>
+        <label><b>DNI:</b></label>
+        <pre>&#9;</pre><label>{{user.dni}}</label>
+        <pre>&#9;</pre>
+        <label><b>Nº CONTACTO:</b></label>
+        <pre>&#9;</pre><label>{{user.contactNumber}}</label>
+
+      </div>
+      <div class="row">
+        <label><b>DIRECCIÓN:</b></label>
+        <pre>&#9;</pre><label>{{user.address}}</label>
+        <pre>&#9;</pre>
+        <label><b>CP:</b></label>
+        <pre>&#9;</pre><label>{{user.postalCode}}</label>
+        <pre>&#9;</pre>
+        <label><b>CIUDAD:</b></label>
+        <pre>&#9;</pre><label>{{user.city}}</label>
+
+      </div>
+      <div class="row">
+        <label><b>IBAN:</b></label>
+        <pre>&#9;</pre><label>{{user.iban}}</label>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-divider></mat-divider>
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">supervised_user_circle</mat-icon>
+        PERSONAL
+      </ng-template>
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Datos personales
+            </mat-panel-title>
+            <mat-panel-description>
+              Modifica tus datos personales
+            </mat-panel-description>
+            <mat-icon>account_circle</mat-icon>
+          </mat-expansion-panel-header>
+
+          <form class="second-form-group" #personalForm (submit)="onSubmitPersonalForm(personalForm)">
+              <ng-template matStepLabel>Rellena tus datos personales</ng-template>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Nombre" [(ngModel)]="user.name" disabled #nameInput="ngModel" name="name" required>
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Apellidos" #surname="ngModel" [(ngModel)]="user.surname" disabled name="surname" required>
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                  <input matInput placeholder="Email" disabled required value="{{user.email}}">
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input name="DNI" matInput placeholder="DNI" [(ngModel)]="user.dni" disabled #dniInput="ngModel" required pattern="(\d{8})([A-Z])">
+                    <mat-error *ngIf="dniInput.invalid">Inserte un DNI válido</mat-error>
+                  </mat-form-field>
+              <mat-form-field class="full-width">
+                  <input matInput placeholder="Nº de contacto" required [(ngModel)]="user.contactNumber" name="contactNumber" #numberInput="ngModel" pattern="(\d{9})">
+                  <mat-error *ngIf="numberInput.invalid">Inserte un número de teléfono de 9 dígitos</mat-error>
+                </mat-form-field>
+              <mat-form-field class="full-width">
+                <input name="birthdate" matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" [(ngModel)]="user.birthdate" #birthdate="ngModel" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="address">
+                <input matInput placeholder="Dirección" [(ngModel)]="user.address" #address="ngModel" name="address" required>
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Código postal" [(ngModel)]="user.postalCode" #postalCode="ngModel" name="postalCode" required>
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Ciudad" [(ngModel)]="user.city" #city="ngModel" name="city" required>
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit">Modificar</button>
+
+            </form>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Cuenta bancaria
+            </mat-panel-title>
+            <mat-panel-description>
+              Revisa tus datos bancarios
+            </mat-panel-description>
+            <mat-icon>account_balance</mat-icon>
+          </mat-expansion-panel-header>
+          <form class="fourth-form-group">
+              <ng-template matStepLabel>Introduce datos de pago</ng-template>
+                  <mat-form-field class="full-width">
+                      <input name="IBAN" matInput placeholder="IBAN" [(ngModel)]="user.iban" #ibanInput="ngModel" required >
+                      <mat-error *ngIf="ibanInput.invalid">Inserte un IBAN válido</mat-error>
+                    </mat-form-field>
+            </form>
+            <button mat-raised-button color="primary" type="submit">Modificar</button>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Renovación cuota
+              </mat-panel-title>
+              <mat-panel-description>
+                Renueva tu cuota
+              </mat-panel-description>
+              <mat-icon>euro_symbol</mat-icon>
+            </mat-expansion-panel-header>
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Cuotas" ngModel name="quota" #quota [(ngModel)]="selectedQuota" required>
+                    <mat-option *ngFor="let quota of quotas" [value]="quota">
+                      {{quota.periodInMonths}} meses - {{quota.pricePerMonth}} € al mes
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+            <button mat-flat-button [disabled]="!selectedQuota" color="primary" type="button" (click)="openRenewDialog()">Contratar cuota</button>
+
+          </mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Bajas
+                </mat-panel-title>
+                <mat-panel-description>
+                  Darse de baja
+                </mat-panel-description>
+                <mat-icon>exit_to_app</mat-icon>
+              </mat-expansion-panel-header>
+              <button mat-flat-button color="warn" type="button" (click)="openDeregisterDialog()">Darse de baja</button>
+            </mat-expansion-panel>
+      </mat-accordion>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">calendar_today</mat-icon>
+        RESERVA DE ACTIVIDADES
+      </ng-template>
+      Proximamente será posible reservar actividades desde aquí
+    </mat-tab>
+  </mat-tab-group>
+</div>

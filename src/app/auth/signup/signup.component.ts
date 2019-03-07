@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
   checkRegisterEmail(email: NgForm, stepper: MatStepper) {
     this.alreadyExists = false;
 
-    //todo acceder al authservice
+    // todo acceder al authservice
     this.alreadyExists = false;
     if (this.alreadyExists) {
       stepper.previous();

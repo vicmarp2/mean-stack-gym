@@ -35,7 +35,7 @@
               <mat-error *ngIf="dniInput.invalid">Inserte un DNI válido</mat-error>
             </mat-form-field>
         <mat-form-field class="full-width">
-            <input matInput placeholder="contactNumber" required ngModel name="contactNumber" #numberInput="ngModel" pattern="(\d{9})">
+            <input matInput placeholder="Nº de contacto" required ngModel name="contactNumber" #numberInput="ngModel" pattern="(\d{9})">
             <mat-error *ngIf="numberInput.invalid">Inserte un número de teléfono de 9 dígitos</mat-error>
           </mat-form-field>
         <mat-form-field class="full-width">

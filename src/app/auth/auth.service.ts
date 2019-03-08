@@ -49,8 +49,29 @@ export class AuthService {
     );
   }
 
+  createFreeUser(user: any) {
+    this.http.post<{message: string; user: any }>(BACKEND_URL + '/signup/free', user)
+    .subscribe(
+      (result) => {
+        this.login(user.email, user.password);
+      },
+      error => {
+        this.authStatusListener.next(false);
+      }
+    );
+  }
+
   checkDuplicatedUser(email: string) {
     return this.http.post<{duplicated: boolean}>(BACKEND_URL + '/duplicate', {email})
+      .pipe(
+        map(data => {
+          return data.duplicated;
+        })
+      );
+  }
+
+  checkDuplicatedDNI(dni: string) {
+    return this.http.post<{duplicated: boolean}>(BACKEND_URL + '/duplicate/dni', {dni})
       .pipe(
         map(data => {
           return data.duplicated;

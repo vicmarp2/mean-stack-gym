@@ -26,6 +26,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserComponent } from './user/user.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { DeregisterDialogComponent } from './user/deregister-dialog/deregister-dialog.component';
+import { RenewDialogComponent } from './user/renew-dialog/renew-dialog.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     LoginComponent,
     SignupComponent,
     UserComponent,
+    DeregisterDialogComponent,
+    RenewDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,10 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DeregisterDialogComponent,
+    RenewDialogComponent,
+  ]
 })
 export class AppModule { }

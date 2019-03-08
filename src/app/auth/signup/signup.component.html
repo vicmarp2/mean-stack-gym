@@ -53,9 +53,10 @@
         <mat-form-field class="full-width">
           <input matInput placeholder="Ciudad" [(ngModel)]="userData.city" #city="ngModel" name="city" required>
         </mat-form-field>
+        <mat-error *ngIf="alreadyExistsDNI === true">Ya hay un usuario de alta con este DNI</mat-error>
         <div>
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button matStepperNext [disabled]="dniInput.invalid || numberInput.invalid || city.invalid || postalCode.invalid || address.invalid ||
+          <button mat-button matStepperNext (click)="checkRegisterDNI(dniInput.value, stepper)" [disabled]="dniInput.invalid || numberInput.invalid || city.invalid || postalCode.invalid || address.invalid ||
           birthdate.invalid || nameInput.invalid || surname.invalid ">Continuar</button>
         </div>
       </form>
@@ -85,7 +86,8 @@
                   </mat-form-field>
                   <mat-error *ngIf="userProblem">Revise los datos. Falta alguno o es incorrecto</mat-error>
                   <mat-error *ngIf="alreadyExists === true">Este usuario ya está dado de alta</mat-error>
-            <div>
+                  <mat-error *ngIf="alreadyExistsDNI === true">Ya hay un usuario de alta con este DNI</mat-error>
+                  <div>
               <button mat-button matStepperPrevious>Atrás</button>
               <button mat-button (click)="onSignup()">Inscribirse</button>
             </div>

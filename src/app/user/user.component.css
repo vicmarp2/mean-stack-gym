@@ -1,0 +1,49 @@
+.container {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  min-height: 500px;
+}
+
+.card-container {
+  display: inline-block;
+  padding: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.card-content-container {
+  margin-left: 50px;
+}
+
+mat-form-field {
+  margin-right: 20px;
+}
+
+.address {
+  width: 30%;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+
+mat-divider {
+  margin: 20px 0;
+}
+
+mat-card {
+  margin: 10px 0;
+}
+
+
+.tab-icon {
+  margin-right: 8px;
+}
+
+mat-tab-group {
+  width: 100%;
+}
+
+mat-expansion-panel {
+  margin-top: 20px;
+}

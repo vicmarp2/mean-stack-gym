@@ -12,20 +12,30 @@
   </div>
   <form class="form-container" #tryfreeForm="ngForm" (submit)="onTryfree(tryfreeForm)">
     <mat-form-field class="full-width">
-      <input matInput name="name" ngModel placeholder="Nombre" required>
+      <input matInput name="name" [(ngModel)]="userData.name" placeholder="Nombre" required>
     </mat-form-field>
     <mat-form-field class="full-width">
-      <input matInput name="surname" ngModel placeholder="Apellidos" required>
+      <input matInput name="surname" [(ngModel)]="userData.surname" placeholder="Apellidos" required>
     </mat-form-field>
     <mat-form-field class="full-width">
-      <input name="email" type="email" matInput ngModel placeholder="Email" #emailInput="ngModel" required email>
+      <input name="email" type="email" matInput [(ngModel)]="userData.email" placeholder="Email" #emailInput="ngModel" required email>
       <mat-error *ngIf="emailInput.invalid">Inserte un email válido</mat-error>
     </mat-form-field>
     <mat-form-field class="full-width">
-      <input name="DNI" matInput placeholder="DNI" ngModel #dniInput="ngModel" required pattern="(\d{8})([A-Z])">
+      <input name="DNI" matInput placeholder="DNI" [(ngModel)]="userData.dni" #dniInput="ngModel" required pattern="(\d{8})([A-Z])">
       <mat-error *ngIf="dniInput.invalid">Inserte un DNI válido</mat-error>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Enviar</button>
+    <mat-form-field class="full-width">
+      <input matInput type="password" placeholder="Contraseña" password #passwordInput="ngModel" name="password" [(ngModel)]="userData.password" required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="password" placeholder="Confirma contraseña" password #confirmPasswordInput="ngModel" name="confirmPassword" [(ngModel)]="userData.confirmPassword" required />
+    </mat-form-field>
+    <mat-error *ngIf="userIsAuth" style="text-align: left!important">Ya eres miembro del gimnasio</mat-error>
+    <mat-error *ngIf="alreadyExists === true">Este usuario ya está dado de alta</mat-error>
+    <mat-error *ngIf="alreadyExistsDNI === true">Ya hay un usuario de alta con este DNI</mat-error>
+    <mat-error *ngIf="differentPassword">Las contraseñas deben ser iguales</mat-error>
+    <button [disabled]="userIsAuth" mat-raised-button color="primary" type="submit">Enviar</button>
   </form>
 
   <mat-divider></mat-divider>

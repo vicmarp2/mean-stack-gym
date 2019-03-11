@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { User } from './models/user.model';
+import { User } from '../user/user.model';
 import { map } from 'rxjs/operators';
 
 const BACKEND_URL = environment.apiUrl + '/users';
@@ -59,24 +59,6 @@ export class AuthService {
         this.authStatusListener.next(false);
       }
     );
-  }
-
-  checkDuplicatedUser(email: string) {
-    return this.http.post<{duplicated: boolean}>(BACKEND_URL + '/duplicate', {email})
-      .pipe(
-        map(data => {
-          return data.duplicated;
-        })
-      );
-  }
-
-  checkDuplicatedDNI(dni: string) {
-    return this.http.post<{duplicated: boolean}>(BACKEND_URL + '/duplicate/dni', {dni})
-      .pipe(
-        map(data => {
-          return data.duplicated;
-        })
-      );
   }
 
   login(email: string, password: string) {

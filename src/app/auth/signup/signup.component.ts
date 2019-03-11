@@ -5,8 +5,9 @@ import { Quota } from 'src/app/quotas/quota.model';
 import { QuotasService } from 'src/app/quotas/quotas.service';
 import { Subscription, Observable, zip } from 'rxjs';
 import { AuthService } from '../auth.service';
-import { User } from '../models/user.model';
+import { User } from '../../user/user.model';
 import { addMonths } from 'date-fns';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -28,7 +29,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   private quotasSub: Subscription;
   userProblem = false;
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private quotasService: QuotasService) { }
+  constructor(private authService: AuthService, private userService: UserService,
+    private formBuilder: FormBuilder, private quotasService: QuotasService) { }
 
   ngOnInit() {
     this.quotasService.getQuotas();
@@ -56,7 +58,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   checkRegisterEmail(email: string, stepper: MatStepper) {
     this.alreadyExists = false;
-    this.authService.checkDuplicatedUser(email)
+    this.userService.checkDuplicatedUser(email)
       .subscribe((duplicated) => {
         this.alreadyExists = duplicated;
         if (duplicated) {
@@ -68,7 +70,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   checkRegisterDNI(dni: string, stepper: MatStepper) {
     this.alreadyExistsDNI = false;
-    this.authService.checkDuplicatedDNI(dni)
+    this.userService.checkDuplicatedDNI(dni)
       .subscribe((duplicated) => {
         this.alreadyExistsDNI = duplicated;
         if (duplicated) {
@@ -81,8 +83,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   onSignup() {
     this.alreadyExists = false;
     this.alreadyExistsDNI = false;
-    const duplicatedEmail$: Observable<boolean> = this.authService.checkDuplicatedUser(this.userData.email);
-    const duplicatedDNI$: Observable<boolean> = this.authService.checkDuplicatedDNI(this.userData.dni);
+    const duplicatedEmail$: Observable<boolean> = this.userService.checkDuplicatedUser(this.userData.email);
+    const duplicatedDNI$: Observable<boolean> = this.userService.checkDuplicatedDNI(this.userData.dni);
 
     zip(duplicatedEmail$, duplicatedDNI$)
       .subscribe(([duplicatedEmail, duplicatedDNI]) => {

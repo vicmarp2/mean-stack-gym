@@ -7,6 +7,7 @@ import { AuthService } from '../auth.service';
 import { Quota } from 'src/app/quotas/quota.model';
 import { QuotasService } from 'src/app/quotas/quotas.service';
 import { addWeeks } from 'date-fns';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-tryfree',
@@ -22,8 +23,8 @@ export class TryfreeComponent implements OnInit, OnDestroy {
   private quotasSub: Subscription;
   userIsAuth = false;
   private authListener: Subscription;
-  constructor(private authService: AuthService, private quotasService: QuotasService,
-     private snackBar: MatSnackBar, private route: Router) {}
+  constructor(private authService: AuthService, private userService: UserService,
+    private quotasService: QuotasService, private snackBar: MatSnackBar, private route: Router) {}
 
   ngOnInit() {
     this.userIsAuth = this.authService.getIsAuth();
@@ -51,8 +52,8 @@ export class TryfreeComponent implements OnInit, OnDestroy {
       this.differentPassword = true;
       return;
     }
-    const duplicatedEmail$: Observable<boolean> = this.authService.checkDuplicatedUser(this.userData.email);
-    const duplicatedDNI$: Observable<boolean> = this.authService.checkDuplicatedDNI(this.userData.dni);
+    const duplicatedEmail$: Observable<boolean> = this.userService.checkDuplicatedUser(this.userData.email);
+    const duplicatedDNI$: Observable<boolean> = this.userService.checkDuplicatedDNI(this.userData.dni);
 
     zip(duplicatedEmail$, duplicatedDNI$)
       .subscribe(([duplicatedEmail, duplicatedDNI]) => {

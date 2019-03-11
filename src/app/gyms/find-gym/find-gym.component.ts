@@ -15,10 +15,11 @@ export class FindGymComponent implements OnInit,  OnDestroy {
   mapLongitude = -3;
   mapZoom = 6.3;
   ICON = {
-    url: '../../../assets/logo/cropped-logo-herca-negro_fondoblanco_recortado_transparente.png',
+    // url: '../../../assets/logo/cropped-logo-herca-negro_fondoblanco_recortado_transparente.png',
+    url: '../../../assets/logo/IRONSQUAT1.png',
     scaledSize: {
-      width: 100,
-      height: 60,
+      width: 150,
+      height: 90,
     },
   };
 

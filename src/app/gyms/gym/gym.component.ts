@@ -26,10 +26,11 @@ export class GymComponent implements OnInit,  OnDestroy {
 
   mapZoom = 17;
   ICON = {
-    url: '../../../assets/logo/cropped-logo-herca-negro_fondoblanco_recortado_transparente.png',
+    // url: '../../../assets/logo/cropped-logo-herca-negro_fondoblanco_recortado_transparente.png',
+    url: '../../../assets/logo/IRONSQUAT1.png',
     scaledSize: {
-      width: 100,
-      height: 60,
+      width: 150,
+      height: 90,
     },
   };
 
@@ -82,6 +83,8 @@ export class GymComponent implements OnInit,  OnDestroy {
             this.mapLongitude = this.selectedGym.coordinates.longitude;
             this.fetchMapMarker();
           });
+      } else {
+
       }
     });
   }

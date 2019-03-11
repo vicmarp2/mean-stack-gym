@@ -7,18 +7,29 @@
       <div class="row">
         <label><b>CÓDIGO SOCIO:</b></label>
         <pre>&#9;</pre>
-        <label>{{user.userId}}</label>
+        <label>{{user.id}}</label>
         <pre>&#9;</pre>
-        <label><b>CUOTA:</b></label>
+        <label><b>EMAIL:</b></label>
         <pre>&#9;</pre>
-        <label>{{user.quota.title}}</label>
+        <pre>&#9;</pre><label>{{user.email}}</label>
         <pre>&#9;</pre>
-        <label><b>ESTADO:</b></label>
-        <pre>&#9;</pre>
-        <label>{{user.purchaseDate | date : 'shortDate'}}</label>
-
       </div>
       <div class="row">
+          <label><b>NOMBRE COMPLETO:</b></label>
+          <pre>&#9;</pre><label>{{user.name}} {{user.surname}}</label>
+          <pre>&#9;</pre>
+          <label><b>DNI:</b></label>
+          <pre>&#9;</pre><label>{{user.dni}}</label>
+          <pre>&#9;</pre>
+          <label><b>Nº CONTACTO:</b></label>
+          <pre>&#9;</pre><label>{{user.contactNumber}}</label>
+
+        </div>
+      <div class="row">
+          <label><b>CUOTA:</b></label>
+          <pre>&#9;</pre>
+          <label>{{user.quota.title}}</label>
+          <pre>&#9;</pre>
         <label><b>FECHA DE COMPRA:</b></label>
         <pre>&#9;</pre>
         <label>{{user.purchaseDate | date : 'shortDate'}}</label>
@@ -27,21 +38,8 @@
         <pre>&#9;</pre>
         <label>{{user.endDate | date : 'shortDate'}}</label>
         <pre>&#9;</pre>
-        <label><b>EMAIL:</b></label>
-        <pre>&#9;</pre><label>{{user.email}}</label>
-        <pre>&#9;</pre>
       </div>
-      <div class="row">
-        <label><b>NOMBRE COMPLETO:</b></label>
-        <pre>&#9;</pre><label>{{user.name}} {{user.surname}}</label>
-        <pre>&#9;</pre>
-        <label><b>DNI:</b></label>
-        <pre>&#9;</pre><label>{{user.dni}}</label>
-        <pre>&#9;</pre>
-        <label><b>Nº CONTACTO:</b></label>
-        <pre>&#9;</pre><label>{{user.contactNumber}}</label>
 
-      </div>
       <div class="row">
         <label><b>DIRECCIÓN:</b></label>
         <pre>&#9;</pre><label>{{user.address}}</label>
@@ -78,19 +76,19 @@
             <mat-icon>account_circle</mat-icon>
           </mat-expansion-panel-header>
 
-          <form class="second-form-group" #personalForm (submit)="onSubmitPersonalForm(personalForm)">
+          <form class="second-form-group" #personalForm="ngForm" (submit)="onSubmitPersonalForm(personalForm)">
               <ng-template matStepLabel>Rellena tus datos personales</ng-template>
               <mat-form-field class="full-width">
-                <input matInput placeholder="Nombre" [(ngModel)]="user.name" disabled #nameInput="ngModel" name="name" required>
+                <input matInput placeholder="Nombre" value="{{user.name}}" disabled  >
               </mat-form-field>
               <mat-form-field class="full-width">
-                <input matInput placeholder="Apellidos" #surname="ngModel" [(ngModel)]="user.surname" disabled name="surname" required>
+                <input matInput placeholder="Apellidos" value="{{user.surname}}" disabled >
               </mat-form-field>
               <mat-form-field class="full-width">
-                  <input matInput placeholder="Email" disabled required value="{{user.email}}">
+                  <input matInput placeholder="Email" disabled  value="{{user.email}}">
                 </mat-form-field>
                 <mat-form-field class="full-width">
-                    <input name="DNI" matInput placeholder="DNI" [(ngModel)]="user.dni" disabled #dniInput="ngModel" required pattern="(\d{8})([A-Z])">
+                    <input name="DNI" matInput placeholder="DNI" [(ngModel)]="user.dni" disabled #dniInput="ngModel"  pattern="(\d{8})([A-Z])">
                     <mat-error *ngIf="dniInput.invalid">Inserte un DNI válido</mat-error>
                   </mat-form-field>
               <mat-form-field class="full-width">
@@ -126,14 +124,14 @@
             </mat-panel-description>
             <mat-icon>account_balance</mat-icon>
           </mat-expansion-panel-header>
-          <form class="fourth-form-group">
+          <form class="fourth-form-group" #bankForm="ngForm" (submit)="onSubmitBankForm(bankForm)">
               <ng-template matStepLabel>Introduce datos de pago</ng-template>
                   <mat-form-field class="full-width">
-                      <input name="IBAN" matInput placeholder="IBAN" [(ngModel)]="user.iban" #ibanInput="ngModel" required >
+                      <input name="IBAN" matInput placeholder="IBAN" [(ngModel)]="newIban" #ibanInput="ngModel" required >
                       <mat-error *ngIf="ibanInput.invalid">Inserte un IBAN válido</mat-error>
                     </mat-form-field>
-            </form>
             <button mat-raised-button color="primary" type="submit">Modificar</button>
+          </form>
         </mat-expansion-panel>
 
         <mat-expansion-panel hideToggle>

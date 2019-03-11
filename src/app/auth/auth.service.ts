@@ -88,7 +88,11 @@ export class AuthService {
             );
             console.log(expirationDate);
             this.saveAuthData(token, expirationDate, this.userId, this.userAdmin);
-            this.router.navigate([`/user/${this.userId}`]);
+            if (this.userAdmin) {
+              this.router.navigate(['admin']);
+            } else {
+              this.router.navigate([`/user/${this.userId}`]);
+            }
           }
         },
         error => {

@@ -29,6 +29,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { DeregisterDialogComponent } from './user/deregister-dialog/deregister-dialog.component';
 import { RenewDialogComponent } from './user/renew-dialog/renew-dialog.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminGymsComponent } from './admin/admin-gyms/admin-gyms.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { AdminComponent } from './admin/admin.component';
     DeregisterDialogComponent,
     RenewDialogComponent,
     AdminComponent,
+    AdminGymsComponent,
   ],
   imports: [
     BrowserModule,

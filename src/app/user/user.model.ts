@@ -18,5 +18,6 @@ export class User {
     public postalCode: string,
     public city: string,
     public iban: string,
+    public isAdmin: boolean,
   ) {}
 }

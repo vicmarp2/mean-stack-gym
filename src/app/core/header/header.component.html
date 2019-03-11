@@ -8,8 +8,11 @@
         <li *ngIf="!userIsAuth">
           <a mat-button routerLink="/auth/login" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
         </li>
-        <li *ngIf="userIsAuth">
+        <li *ngIf="userIsAuth &amp;&amp; !userIsAdmin">
           <a mat-raised-button routerLink="/user/{{userId}}" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
+        </li>
+        <li *ngIf="userIsAuth &amp;&amp; userIsAdmin">
+          <a mat-raised-button routerLink="/admin" routerLinkActive="mat-accent">AREA DE ADMINISTRADOR</a>
         </li>
         <li *ngIf="!userIsAuth">
           <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">INSCRÍBETE</a>

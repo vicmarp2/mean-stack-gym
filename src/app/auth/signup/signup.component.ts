@@ -110,6 +110,7 @@ export class SignupComponent implements OnInit, OnDestroy {
           this.userData.postalCode,
           this.userData.city,
           this.userData.iban,
+          false,
         );
         if (!(user.dni && user.email && user.name && user.surname && user.password && user.quota && user.purchaseDate && user.endDate &&
           user.contactNumber && user.birthdate && user.address && user.postalCode && user.city && user.iban)) {

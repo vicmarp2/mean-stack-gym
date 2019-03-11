@@ -11,6 +11,8 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth/auth.guard';
 import { SignupGuard } from './auth/signup.guard';
+import { AdminComponent } from './admin/admin.component';
+import { AdminGuard } from './admin/admin.guard';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -23,6 +25,7 @@ const appRoutes: Routes = [
   {path: 'auth/login', component: LoginComponent},
   {path: 'auth/signup', component: SignupComponent, canActivate: [SignupGuard]},
   {path: 'user/:userId', component: UserComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: AdminComponent, canActivate: [AdminGuard]},
   {path: '**', redirectTo: ''}
 ];
 
@@ -32,6 +35,7 @@ const appRoutes: Routes = [
   providers: [
     AuthGuard,
     SignupGuard,
+    AdminGuard,
   ]
 })
 export class AppRoutingModule { }

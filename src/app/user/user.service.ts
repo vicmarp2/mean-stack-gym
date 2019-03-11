@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from './user.model';
 import { map } from 'rxjs/operators';
-import { Quota } from '../quotas/quota.model';
 
 const BACKEND_URL = environment.apiUrl + '/users';
 

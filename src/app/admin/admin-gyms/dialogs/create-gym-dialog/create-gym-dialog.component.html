@@ -1,3 +1,40 @@
-<p>
-  create-gym-dialog works!
-</p>
+<h1 mat-dialog-title>Introduce los datos del nuevo gimnasio</h1>
+<div mat-dialog-content>
+  <form class="first-form-group">
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Codigo" #codNameInput="ngModel" name="codName" [(ngModel)]="gym.codName"
+        required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Nombre" #nameInput="ngModel" name="name" [(ngModel)]="gym.name" required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Dirección" #addressInput="ngModel" name="address" [(ngModel)]="gym.address"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Nº contacto" #contactNumberInput="ngModel" name="contactNumber" [(ngModel)]="gym.contactNumber"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Hoario lunes a viernes" #mondayToFridayInput="ngModel" name="mondayToFriday" [(ngModel)]="gym.mondayToFriday"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Horario fines de semana" #wekeendsInput="ngModel" name="weekends" [(ngModel)]="gym.weekend"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Latitud" #latitudeInput="ngModel" name="latitude" [(ngModel)]="gym.latitude"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Longitud" #longitudeInput="ngModel" name="longitude" [(ngModel)]="gym.longitude"
+        required />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onBackClick()">Atrás</button>
+  <button mat-button color="primary" (click)="onCreateClick()" cdkFocusInitial>Crear</button>
+</div>

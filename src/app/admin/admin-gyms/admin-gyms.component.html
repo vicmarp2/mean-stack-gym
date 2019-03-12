@@ -1,11 +1,13 @@
 <mat-toolbar>
-  <button mat-icon-button matTooltip="Añadir">
+  <button mat-icon-button matTooltip="Añadir" (click)="openCreateDialog()">
     <mat-icon>add</mat-icon>
   </button>
-  <button mat-icon-button matTooltip="Editar" [disabled]="!selection.hasValue() || multipleSelected()">
+  <button mat-icon-button matTooltip="Editar" [disabled]="!selection.hasValue() || multipleSelected()"
+  (click)="openEditDialog()">
     <mat-icon>edit</mat-icon>
   </button>
-  <button mat-icon-button matTooltip="Eliminar" [disabled]="!selection.hasValue()">
+  <button mat-icon-button matTooltip="Eliminar" [disabled]="!selection.hasValue()"
+  (click)="openDeleteDialog()">
     <mat-icon>delete</mat-icon>
   </button>
 <mat-form-field>

@@ -79,6 +79,9 @@ import { DeleteGymDialogComponent } from './admin/admin-gyms/dialogs/delete-gym-
   entryComponents: [
     DeregisterDialogComponent,
     RenewDialogComponent,
+    CreateGymDialogComponent,
+    EditGymDialogComponent,
+    DeleteGymDialogComponent,
   ]
 })
 export class AppModule { }

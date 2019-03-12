@@ -9,7 +9,6 @@ import { DeregisterDialogComponent } from './deregister-dialog/deregister-dialog
 import { Quota } from '../quotas/quota.model';
 import { QuotasService } from '../quotas/quotas.service';
 import { RenewDialogComponent } from './renew-dialog/renew-dialog.component';
-import { AuthService } from '../auth/auth.service';
 import { User } from './user.model';
 import { UserService } from './user.service';
 
@@ -24,30 +23,6 @@ export class UserComponent implements OnInit, OnDestroy {
   userId: string;
   user: User;
   newIban: string;
-  //  = {
-  //   userId: '',
-  //   quota: {
-  //     title: 'Cuota 3 meses',
-  //     numberOfPayments: 3,
-  //     pricePerMonth: 20,
-  //     periodInMonths: 3,
-  //     isCardNeeded: true,
-  //     cardPrice: 10,
-  //   },
-  //   dni: '53607620W',
-  //   purchaseDate: new Date(2019, 1, 1),
-  //   endDate: new Date(2019, 4, 1),
-  //   name: 'Víctor',
-  //   surname: 'Martínez Palomares',
-  //   email: 'correo.vmp@gmail.com',
-  //   contactNumber: '638903401',
-  //   birthdate: new Date(),
-  //   address: 'Plaza America, 5 3',
-  //   postalCode: '46900',
-  //   city: 'Torrent, Valencia',
-  //   iban: '5353453453',
-  // };
-  startDate = new Date(1990, 0, 1);
   quotas: Quota[];
   private quotasSub: Subscription;
   selectedQuota: Quota;
@@ -99,7 +74,6 @@ export class UserComponent implements OnInit, OnDestroy {
     }
     const user = this.user;
     user.iban = this.newIban;
-    console.log(user);
     this.userService.updateUser(this.user);
     this.snackBar.open(`Su información bancaria ha sido actualizado.`, '', {
       duration: 2000,

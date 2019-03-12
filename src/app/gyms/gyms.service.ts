@@ -62,6 +62,15 @@ export class GymsService {
     return this.gymsUpdated.asObservable();
   }
 
+  createGym(gym: any) {
+    this.http.post<{message: string; gym: any }>(BACKEND_URL + '/create', {gym})
+    .subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  }
+
   updateGym(gym: Gym) {
     return this.http.put<{ message: string; gym: any }>(BACKEND_URL + '/edit', { gym })
     .subscribe(result => {

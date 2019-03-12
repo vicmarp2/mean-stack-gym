@@ -61,4 +61,20 @@ export class GymsService {
   getGymsUpdateListener() {
     return this.gymsUpdated.asObservable();
   }
+
+  updateGym(gym: Gym) {
+    return this.http.put<{ message: string; gym: any }>(BACKEND_URL + '/edit', { gym })
+    .subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  deleteGym(id: string) {
+    return this.http
+      .delete(BACKEND_URL + '/' + id)
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
+
 }

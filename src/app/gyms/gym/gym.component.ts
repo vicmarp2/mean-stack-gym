@@ -74,10 +74,6 @@ export class GymComponent implements OnInit,  OnDestroy {
         this.selectedGymCodName = selectedGymCodName;
         this.gymsService.getGymByCodeName(this.selectedGymCodName)
           .subscribe(transformedGymData => {
-            // this.postsUpdated.next({
-            //   posts: [...this.posts],
-            //   postCount: transformedPostData.maxPosts
-            // });
             this.selectedGym = transformedGymData.gym;
             this.mapLatitude = this.selectedGym.coordinates.latitude;
             this.mapLongitude = this.selectedGym.coordinates.longitude;

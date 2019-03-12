@@ -30,6 +30,9 @@ import { DeregisterDialogComponent } from './user/deregister-dialog/deregister-d
 import { RenewDialogComponent } from './user/renew-dialog/renew-dialog.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminGymsComponent } from './admin/admin-gyms/admin-gyms.component';
+import { CreateGymDialogComponent } from './admin/admin-gyms/dialogs/create-gym-dialog/create-gym-dialog.component';
+import { EditGymDialogComponent } from './admin/admin-gyms/dialogs/edit-gym-dialog/edit-gym-dialog.component';
+import { DeleteGymDialogComponent } from './admin/admin-gyms/dialogs/delete-gym-dialog/delete-gym-dialog.component';
 
 
 @NgModule({
@@ -50,6 +53,9 @@ import { AdminGymsComponent } from './admin/admin-gyms/admin-gyms.component';
     RenewDialogComponent,
     AdminComponent,
     AdminGymsComponent,
+    CreateGymDialogComponent,
+    EditGymDialogComponent,
+    DeleteGymDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -33,6 +33,10 @@ import { AdminGymsComponent } from './admin/admin-gyms/admin-gyms.component';
 import { CreateGymDialogComponent } from './admin/admin-gyms/dialogs/create-gym-dialog/create-gym-dialog.component';
 import { EditGymDialogComponent } from './admin/admin-gyms/dialogs/edit-gym-dialog/edit-gym-dialog.component';
 import { DeleteGymDialogComponent } from './admin/admin-gyms/dialogs/delete-gym-dialog/delete-gym-dialog.component';
+import { AdminCoursesComponent } from './admin/admin-courses/admin-courses.component';
+import { CreateCourseDialogComponent } from './admin/admin-courses/dialogs/create-course-dialog/create-course-dialog.component';
+import { EditCourseDialogComponent } from './admin/admin-courses/dialogs/edit-course-dialog/edit-course-dialog.component';
+import { DeleteCourseDialogComponent } from './admin/admin-courses/dialogs/delete-course-dialog/delete-course-dialog.component';
 
 
 @NgModule({
@@ -56,6 +60,10 @@ import { DeleteGymDialogComponent } from './admin/admin-gyms/dialogs/delete-gym-
     CreateGymDialogComponent,
     EditGymDialogComponent,
     DeleteGymDialogComponent,
+    AdminCoursesComponent,
+    CreateCourseDialogComponent,
+    EditCourseDialogComponent,
+    DeleteCourseDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +90,9 @@ import { DeleteGymDialogComponent } from './admin/admin-gyms/dialogs/delete-gym-
     CreateGymDialogComponent,
     EditGymDialogComponent,
     DeleteGymDialogComponent,
+    CreateCourseDialogComponent,
+    EditCourseDialogComponent,
+    DeleteCourseDialogComponent,
   ]
 })
 export class AppModule { }

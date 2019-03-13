@@ -47,4 +47,28 @@ export class CoursesService {
   getCoursesUpdateListener() {
     return this.coursesUpdated.asObservable();
   }
+
+  createCourse(course: any) {
+    this.http.post<{message: string; course: any }>(BACKEND_URL + '/create', {course})
+    .subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  }
+
+  updateCourse(course: Course) {
+    return this.http.put<{ message: string; course: any }>(BACKEND_URL + '/edit', { course })
+    .subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  deleteCourse(id: string) {
+    return this.http
+      .delete(BACKEND_URL + '/' + id)
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
 }

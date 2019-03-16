@@ -26,7 +26,7 @@ export class UserComponent implements OnInit, OnDestroy {
   quotas: Quota[];
   private quotasSub: Subscription;
   selectedQuota: Quota;
-
+  startDate = new Date(1990, 0, 1);
   constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
     private quotasService: QuotasService, private userService: UserService, private snackBar: MatSnackBar) { }
 

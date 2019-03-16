@@ -26,8 +26,8 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.coursesService.getCourses();
     this.coursesSub = this.coursesService.getCoursesUpdateListener()
-      .subscribe(transformedQoutasData => {
-        this.courses = transformedQoutasData.courses;
+      .subscribe(transformedCoursesData => {
+        this.courses = transformedCoursesData.courses;
         this.dataSource = new MatTableDataSource<Course>(this.courses);
       });
   }
@@ -65,8 +65,8 @@ export class AdminCoursesComponent implements OnInit, OnDestroy {
 
   openDeleteDialog() {
     const ids = [];
-    this.selection.selected.forEach(gym => {
-      ids.push(gym.id);
+    this.selection.selected.forEach(course => {
+      ids.push(course.id);
     });
     const dialogRef = this.dialog.open(DeleteCourseDialogComponent, {data: {ids}} );
     dialogRef.afterClosed().subscribe(result => {

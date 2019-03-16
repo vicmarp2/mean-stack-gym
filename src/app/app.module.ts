@@ -41,6 +41,10 @@ import { AdminActivitiesComponent } from './admin/admin-activities/admin-activit
 import { CreateActivityDialogComponent } from './admin/admin-activities/dialogs/create-activity-dialog/create-activity-dialog.component';
 import { EditActivityDialogComponent } from './admin/admin-activities/dialogs/edit-activity-dialog/edit-activity-dialog.component';
 import { DeleteActivityDialogComponent } from './admin/admin-activities/dialogs/delete-activity-dialog/delete-activity-dialog.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { CreateUserDialogComponent } from './admin/admin-users/dialogs/create-user-dialog/create-user-dialog.component';
+import { EditUserDialogComponent } from './admin/admin-users/dialogs/edit-user-dialog/edit-user-dialog.component';
+import { DeleteUserDialogComponent } from './admin/admin-users/dialogs/delete-user-dialog/delete-user-dialog.component';
 
 
 @NgModule({
@@ -72,6 +76,10 @@ import { DeleteActivityDialogComponent } from './admin/admin-activities/dialogs/
     CreateActivityDialogComponent,
     EditActivityDialogComponent,
     DeleteActivityDialogComponent,
+    AdminUsersComponent,
+    CreateUserDialogComponent,
+    EditUserDialogComponent,
+    DeleteUserDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +109,9 @@ import { DeleteActivityDialogComponent } from './admin/admin-activities/dialogs/
     CreateCourseDialogComponent,
     EditCourseDialogComponent,
     DeleteCourseDialogComponent,
+    CreateActivityDialogComponent,
+    EditActivityDialogComponent,
+    DeleteActivityDialogComponent,
   ]
 })
 export class AppModule { }

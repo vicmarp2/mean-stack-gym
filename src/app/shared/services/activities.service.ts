@@ -68,7 +68,30 @@ export class ActivitiesService {
             }),
           };
         })
-      )
+      );
+  }
 
+  createActivity(activity: any) {
+    this.http.post<{message: string; activity: any }>(BACKEND_URL + '/create', {activity})
+    .subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  }
+
+  updateActivity(activity: Activity) {
+    return this.http.put<{ message: string; activity: any }>(BACKEND_URL + '/edit', { activity })
+    .subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  deleteActivity(id: string) {
+    return this.http
+      .delete(BACKEND_URL + '/' + id)
+      .subscribe(result => {
+        console.log(result);
+      });
   }
 }

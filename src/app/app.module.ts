@@ -37,6 +37,10 @@ import { AdminCoursesComponent } from './admin/admin-courses/admin-courses.compo
 import { CreateCourseDialogComponent } from './admin/admin-courses/dialogs/create-course-dialog/create-course-dialog.component';
 import { EditCourseDialogComponent } from './admin/admin-courses/dialogs/edit-course-dialog/edit-course-dialog.component';
 import { DeleteCourseDialogComponent } from './admin/admin-courses/dialogs/delete-course-dialog/delete-course-dialog.component';
+import { AdminActivitiesComponent } from './admin/admin-activities/admin-activities.component';
+import { CreateActivityDialogComponent } from './admin/admin-activities/dialogs/create-activity-dialog/create-activity-dialog.component';
+import { EditActivityDialogComponent } from './admin/admin-activities/dialogs/edit-activity-dialog/edit-activity-dialog.component';
+import { DeleteActivityDialogComponent } from './admin/admin-activities/dialogs/delete-activity-dialog/delete-activity-dialog.component';
 
 
 @NgModule({
@@ -64,6 +68,10 @@ import { DeleteCourseDialogComponent } from './admin/admin-courses/dialogs/delet
     CreateCourseDialogComponent,
     EditCourseDialogComponent,
     DeleteCourseDialogComponent,
+    AdminActivitiesComponent,
+    CreateActivityDialogComponent,
+    EditActivityDialogComponent,
+    DeleteActivityDialogComponent,
   ],
   imports: [
     BrowserModule,

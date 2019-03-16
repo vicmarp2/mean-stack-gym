@@ -112,6 +112,9 @@ import { DeleteUserDialogComponent } from './admin/admin-users/dialogs/delete-us
     CreateActivityDialogComponent,
     EditActivityDialogComponent,
     DeleteActivityDialogComponent,
+    CreateUserDialogComponent,
+    EditUserDialogComponent,
+    DeleteUserDialogComponent,
   ]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from './user.model';
 import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 const BACKEND_URL = environment.apiUrl + '/users';
 
@@ -14,6 +15,8 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  private users: User[] = [];
+  private usersUpdated = new Subject<{ users: User[] }>();
 
   checkDuplicatedUser(email: string) {
     return this.http.post<{ duplicated: boolean }>(BACKEND_URL + '/duplicate', { email })
@@ -35,11 +38,36 @@ export class UserService {
 
 
   getUsers() {
+    return this.http
+    .get<{ message: string; users: any }>(
+      BACKEND_URL
+    )
+    .pipe(
+      map(usersData => {
+        return {
+          users: usersData.users.map(users => {
+            return {
+              id: users._id,
+              ...users
+            };
+          }),
+        };
+      })
+    )
+    .subscribe(transformedUserData => {
+      this.users = transformedUserData.users;
+      this.usersUpdated.next({
+      users: [...this.users],
+    });
+  });
+}
 
-  }
+getUsersUpdateListener() {
+  return this.usersUpdated.asObservable();
+}
 
-  updateUser(user: User) {
-    return this.http.put<{ message: string; user: any }>(BACKEND_URL + '/edit', { user })
+  updateUser(user: User, emailChanged: boolean = false) {
+    return this.http.put<{ message: string; user: any }>(BACKEND_URL + '/edit', { user, emailChanged })
     .subscribe(result => {
       console.log(result);
     });

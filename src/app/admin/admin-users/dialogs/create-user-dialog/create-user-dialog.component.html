@@ -1,3 +1,57 @@
-<p>
-  create-user-dialog works!
-</p>
+<h1 mat-dialog-title>Introduce los datos del nuevo usuario</h1>
+<div mat-dialog-content>
+  <form class="first-form-group">
+    <mat-form-field class="full-width">
+      <input matInput type="email" placeholder="Email" email #emailInput="ngModel" name="email" [(ngModel)]="user.email"
+        required>
+      <mat-error *ngIf="emailInput.invalid">Inserte un email válido</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="password" placeholder="Contraseña" password #passwordInput="ngModel" name="password"
+        [(ngModel)]="user.password" required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <input matInput placeholder="Nombre" [(ngModel)]="user.name" #nameInput="ngModel" name="name" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Apellidos" #surname="ngModel" [(ngModel)]="user.surname" name="surname" required>
+      </mat-form-field>
+    <mat-form-field class="full-width">
+        <input name="DNI" matInput placeholder="DNI" [(ngModel)]="user.dni" #dniInput="ngModel" required pattern="(\d{8})([A-Z])">
+        <mat-error *ngIf="dniInput.invalid">Inserte un DNI válido</mat-error>
+      </mat-form-field>
+  <mat-form-field class="full-width">
+      <input matInput placeholder="Nº de contacto" required [(ngModel)]="user.contactNumber" name="contactNumber" #numberInput="ngModel" pattern="(\d{9})">
+      <mat-error *ngIf="numberInput.invalid">Inserte un número de teléfono de 9 dígitos</mat-error>
+    </mat-form-field>
+  <mat-form-field class="full-width">
+    <input name="birthdate" matInput [matDatepicker]="picker" placeholder="Fecha de nacimiento" [(ngModel)]="user.birthdate" #birthdate="ngModel" required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Dirección" [(ngModel)]="user.address" #address="ngModel" name="address" required>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Código postal" [(ngModel)]="user.postalCode" #postalCode="ngModel" name="postalCode" required>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Ciudad" [(ngModel)]="user.city" #city="ngModel" name="city" required>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+      <mat-select placeholder="Cuotas" ngModel name="quota" #quota [(ngModel)]="selectedQuota" required>
+          <mat-option *ngFor="let quota of quotas" [value]="quota">
+            {{quota.periodInMonths}} meses - {{quota.pricePerMonth}} € al mes
+          </mat-option>
+        </mat-select>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+      <input name="IBAN" matInput placeholder="IBAN" [(ngModel)]="user.iban" #ibanInput="ngModel" required >
+      <mat-error *ngIf="ibanInput.invalid">Inserte un IBAN válido</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onBackClick()">Atrás</button>
+  <button mat-button color="primary" (click)="onCreateClick()" cdkFocusInitial>Crear</button>
+</div>

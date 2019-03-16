@@ -27,6 +27,9 @@ export class UserComponent implements OnInit, OnDestroy {
   private quotasSub: Subscription;
   selectedQuota: Quota;
   startDate = new Date(1990, 0, 1);
+  private oldEmail = this.user.email;
+
+
   constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
     private quotasService: QuotasService, private userService: UserService, private snackBar: MatSnackBar) { }
 
@@ -62,7 +65,8 @@ export class UserComponent implements OnInit, OnDestroy {
     if (form.invalid) {
       return;
     }
-    this.userService.updateUser(this.user);
+    const emailChanged = this.user.email !== this.oldEmail;
+    this.userService.updateUser(this.user, emailChanged);
     this.snackBar.open(`El usuario ha sido actualizado.`, '', {
       duration: 2000,
     });
@@ -74,7 +78,7 @@ export class UserComponent implements OnInit, OnDestroy {
     }
     const user = this.user;
     user.iban = this.newIban;
-    this.userService.updateUser(this.user);
+    this.userService.updateUser(this.user, false);
     this.snackBar.open(`Su información bancaria ha sido actualizado.`, '', {
       duration: 2000,
     });

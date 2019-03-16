@@ -45,7 +45,8 @@ export class AuthService {
     this.http.post<{message: string; user: any }>(BACKEND_URL + '/signup', user)
     .subscribe(
       (result) => {
-        this.login(user.email, user.password);
+
+        // this.login(user.email, user.password);
       },
       error => {
         this.authStatusListener.next(false);

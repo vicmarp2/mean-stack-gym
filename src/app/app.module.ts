@@ -45,6 +45,10 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { CreateUserDialogComponent } from './admin/admin-users/dialogs/create-user-dialog/create-user-dialog.component';
 import { EditUserDialogComponent } from './admin/admin-users/dialogs/edit-user-dialog/edit-user-dialog.component';
 import { DeleteUserDialogComponent } from './admin/admin-users/dialogs/delete-user-dialog/delete-user-dialog.component';
+import { AdminQuotasComponent } from './admin/admin-quotas/admin-quotas.component';
+import { CreateQuotaDialogComponent } from './admin/admin-quotas/dialogs/create-quota-dialog/create-quota-dialog.component';
+import { EditQuotaDialogComponent } from './admin/admin-quotas/dialogs/edit-quota-dialog/edit-quota-dialog.component';
+import { DeleteQuotaDialogComponent } from './admin/admin-quotas/dialogs/delete-quota-dialog/delete-quota-dialog.component';
 
 
 @NgModule({
@@ -80,6 +84,10 @@ import { DeleteUserDialogComponent } from './admin/admin-users/dialogs/delete-us
     CreateUserDialogComponent,
     EditUserDialogComponent,
     DeleteUserDialogComponent,
+    AdminQuotasComponent,
+    CreateQuotaDialogComponent,
+    EditQuotaDialogComponent,
+    DeleteQuotaDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,6 +123,9 @@ import { DeleteUserDialogComponent } from './admin/admin-users/dialogs/delete-us
     CreateUserDialogComponent,
     EditUserDialogComponent,
     DeleteUserDialogComponent,
+    CreateQuotaDialogComponent,
+    EditQuotaDialogComponent,
+    DeleteQuotaDialogComponent,
   ]
 })
 export class AppModule { }

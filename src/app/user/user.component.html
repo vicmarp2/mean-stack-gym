@@ -79,10 +79,10 @@
           <form class="second-form-group" #personalForm="ngForm" (submit)="onSubmitPersonalForm(personalForm)">
             <ng-template matStepLabel>Rellena tus datos personales</ng-template>
             <mat-form-field class="full-width">
-              <input matInput placeholder="Nombre" value="{{user.name}}" disabled>
+              <input matInput placeholder="Nombre" value="{{user?.name}}" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
-              <input matInput placeholder="Apellidos" value="{{user.surname}}" disabled>
+              <input matInput placeholder="Apellidos" value="{{user?.surname}}" disabled>
             </mat-form-field>
             <mat-form-field class="full-width">
               <input name="DNI" matInput placeholder="DNI" [(ngModel)]="user.dni" disabled #dniInput="ngModel" pattern="(\d{8})([A-Z])">

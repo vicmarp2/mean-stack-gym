@@ -49,6 +49,7 @@ import { AdminQuotasComponent } from './admin/admin-quotas/admin-quotas.componen
 import { CreateQuotaDialogComponent } from './admin/admin-quotas/dialogs/create-quota-dialog/create-quota-dialog.component';
 import { EditQuotaDialogComponent } from './admin/admin-quotas/dialogs/edit-quota-dialog/edit-quota-dialog.component';
 import { DeleteQuotaDialogComponent } from './admin/admin-quotas/dialogs/delete-quota-dialog/delete-quota-dialog.component';
+import { ErrorInterceptor } from './error-interceptor';
 
 
 @NgModule({
@@ -106,6 +107,7 @@ import { DeleteQuotaDialogComponent } from './admin/admin-quotas/dialogs/delete-
       useValue: { showError: true }
     },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -27,14 +27,12 @@ export class UserComponent implements OnInit, OnDestroy {
   private quotasSub: Subscription;
   selectedQuota: Quota;
   startDate = new Date(1990, 0, 1);
-  private oldEmail = this.user.email;
-
+  private oldEmail: string;
 
   constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog,
     private quotasService: QuotasService, private userService: UserService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-
     // se obtiene el usuario de la ruta
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
@@ -46,6 +44,7 @@ export class UserComponent implements OnInit, OnDestroy {
         this.userService.getUser(this.userId)
           .subscribe(user => {
             this.user = user;
+            this.oldEmail = this.user.email;
             this.newIban = this.user.iban;
           });
       }
@@ -66,9 +65,12 @@ export class UserComponent implements OnInit, OnDestroy {
       return;
     }
     const emailChanged = this.user.email !== this.oldEmail;
-    this.userService.updateUser(this.user, emailChanged);
-    this.snackBar.open(`El usuario ha sido actualizado.`, '', {
-      duration: 2000,
+    this.userService.updateUser(this.user, emailChanged)
+    .subscribe(result => {
+      console.log(result);
+      this.snackBar.open(`El usuario ha sido actualizado.`, '', {
+        duration: 2000,
+      });
     });
   }
 
@@ -78,9 +80,12 @@ export class UserComponent implements OnInit, OnDestroy {
     }
     const user = this.user;
     user.iban = this.newIban;
-    this.userService.updateUser(this.user, false);
-    this.snackBar.open(`Su información bancaria ha sido actualizado.`, '', {
-      duration: 2000,
+    this.userService.updateUser(this.user, false)
+    .subscribe(result => {
+      console.log(result);
+      this.snackBar.open(`Su información bancaria ha sido actualizado.`, '', {
+        duration: 2000,
+      });
     });
   }
 

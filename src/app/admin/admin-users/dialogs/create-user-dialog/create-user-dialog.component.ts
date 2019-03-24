@@ -22,10 +22,11 @@ export class CreateUserDialogComponent implements OnInit, OnDestroy {
   private quotasSub: Subscription;
 
   constructor(public dialogRef: MatDialogRef<CreateUserDialogComponent>,
-    private userService: UserService, private authService: AuthService,
+    private userService: UserService, public authService: AuthService,
     private quotasService: QuotasService) { }
 
   ngOnInit() {
+    this.user.isAdmin = false;
     this.quotasService.getQuotas();
     this.quotasSub = this.quotasService.getQuotasUpdateListener()
       .subscribe(transformedQoutasData => {
@@ -66,12 +67,18 @@ export class CreateUserDialogComponent implements OnInit, OnDestroy {
         this.user.postalCode,
         this.user.city,
         this.user.iban,
-        false,
-      );
+        this.user.isAdmin,
+        );
+        console.log(newUser);
       this.authService.createUser(newUser);
       this.dialogRef.close();
     });
   }
+
+  setAdminValue(event) {
+    this.user.isAdmin = event.checked ? true : false;
+  }
+
   ngOnDestroy() {
     this.quotasSub.unsubscribe();
   }

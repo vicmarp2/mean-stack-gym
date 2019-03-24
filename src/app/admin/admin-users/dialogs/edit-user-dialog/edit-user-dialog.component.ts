@@ -5,6 +5,7 @@ import { User } from 'src/app/user/user.model';
 import { Subscription, Observable, zip } from 'rxjs';
 import { Quota } from 'src/app/quotas/quota.model';
 import { QuotasService } from 'src/app/quotas/quotas.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -20,7 +21,7 @@ export class EditUserDialogComponent implements OnInit, OnDestroy {
 
   constructor(public dialogRef: MatDialogRef<EditUserDialogComponent>,
   private userService: UserService, @Inject(MAT_DIALOG_DATA) public data: { user: User },
-  private quotasService: QuotasService) { }
+  private quotasService: QuotasService, public authService: AuthService) { }
 
   ngOnInit() {
 
@@ -42,11 +43,16 @@ export class EditUserDialogComponent implements OnInit, OnDestroy {
 
   onEditClick() {
     const emailChanged = this.data.user.email !== this.oldEmail;
-    this.userService.updateUser(this.data.user, emailChanged);
+    this.userService.updateUser(this.data.user, emailChanged)
+    .subscribe(result => {
+      console.log(result);
+    });
     this.dialogRef.close();
   }
 
-
+  setAdminValue(event) {
+    this.data.user.isAdmin = event.checked ? true : false;
+  }
   ngOnDestroy() {
     this.quotasSub.unsubscribe();
   }

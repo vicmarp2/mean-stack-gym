@@ -48,4 +48,28 @@ export class QuotasService {
   getQuotasUpdateListener() {
     return this.quotasUpdated.asObservable();
   }
+
+  createQuota(quota: any) {
+    this.http.post<{message: string; quota: any }>(BACKEND_URL + '/create', {quota})
+    .subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  }
+
+  updateQuota(quota: Quota) {
+    return this.http.put<{ message: string; quota: any }>(BACKEND_URL + '/edit', { quota })
+    .subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  deleteQuota(id: string) {
+    return this.http
+      .delete(BACKEND_URL + '/' + id)
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
 }

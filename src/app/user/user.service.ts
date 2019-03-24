@@ -67,10 +67,7 @@ getUsersUpdateListener() {
 }
 
   updateUser(user: User, emailChanged: boolean = false) {
-    return this.http.put<{ message: string; user: any }>(BACKEND_URL + '/edit', { user, emailChanged })
-    .subscribe(result => {
-      console.log(result);
-    });
+    return this.http.put<{ message: string; user: any }>(BACKEND_URL + '/edit', { user, emailChanged });
   }
 
   getUser(userId: string) {

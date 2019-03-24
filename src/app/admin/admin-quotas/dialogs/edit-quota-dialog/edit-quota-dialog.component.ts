@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Quota } from 'src/app/quotas/quota.model';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { QuotasService } from 'src/app/quotas/quotas.service';
 
 @Component({
   selector: 'app-edit-quota-dialog',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditQuotaDialogComponent implements OnInit {
 
-  constructor() { }
+  quota: Quota;
+
+  constructor(public dialogRef: MatDialogRef<EditQuotaDialogComponent>,
+    private quotasService: QuotasService, @Inject(MAT_DIALOG_DATA) public data: { quota: Quota }) { }
 
   ngOnInit() {
   }
 
+  onBackClick(): void {
+    this.dialogRef.close();
+  }
+
+  onEditClick() {
+    this.quotasService.updateQuota(this.data.quota);
+    this.dialogRef.close();
+  }
 }

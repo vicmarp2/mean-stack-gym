@@ -45,9 +45,12 @@
       <input name="IBAN" matInput placeholder="IBAN" [(ngModel)]="data.user.iban" #ibanInput="ngModel" required >
       <mat-error *ngIf="ibanInput.invalid">Inserte un IBAN válido</mat-error>
     </mat-form-field>
-    <mat-form-field class="full-width">
-      <input name="isAdmin" matInput placeholder="Administrador" [(ngModel)]="data.user.isAdmin" #isAdminInput="ngModel" required >
-    </mat-form-field>
+    <mat-slide-toggle
+    [checked]="data.user.isAdmin"
+    [disabled]="data.user.id === this.authService.getUserId()"
+      (change)="setAdminValue($event)">
+       Administrador
+    </mat-slide-toggle>
   </form>
 </div>
 <div mat-dialog-actions>

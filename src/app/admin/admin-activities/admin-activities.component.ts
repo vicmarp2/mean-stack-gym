@@ -69,6 +69,7 @@ export class AdminActivitiesComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(DeleteActivityDialogComponent, {data: {ids}} );
     dialogRef.afterClosed().subscribe(result => {
       this.activitiesService.getActivities();
+      this.activitiesService.getAllEvents();
       this.selection.clear();
     });
   }
@@ -77,6 +78,7 @@ export class AdminActivitiesComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(EditActivityDialogComponent, {data: {activity: this.selection.selected[0]}});
     dialogRef.afterClosed().subscribe(result => {
       this.activitiesService.getActivities();
+      this.activitiesService.getAllEvents();
       this.selection.clear();
     });
   }

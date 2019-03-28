@@ -50,6 +50,10 @@ import { CreateQuotaDialogComponent } from './admin/admin-quotas/dialogs/create-
 import { EditQuotaDialogComponent } from './admin/admin-quotas/dialogs/edit-quota-dialog/edit-quota-dialog.component';
 import { DeleteQuotaDialogComponent } from './admin/admin-quotas/dialogs/delete-quota-dialog/delete-quota-dialog.component';
 import { ErrorInterceptor } from './error-interceptor';
+import { AdminEventsComponent } from './admin/admin-events/admin-events.component';
+import { CreateEventDialogComponent } from './admin/admin-events/dialogs/create-event-dialog/create-event-dialog.component';
+import { EditEventDialogComponent } from './admin/admin-events/dialogs/edit-event-dialog/edit-event-dialog.component';
+import { DeleteEventDialogComponent } from './admin/admin-events/dialogs/delete-event-dialog/delete-event-dialog.component';
 
 
 @NgModule({
@@ -89,6 +93,10 @@ import { ErrorInterceptor } from './error-interceptor';
     CreateQuotaDialogComponent,
     EditQuotaDialogComponent,
     DeleteQuotaDialogComponent,
+    AdminEventsComponent,
+    CreateEventDialogComponent,
+    EditEventDialogComponent,
+    DeleteEventDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -128,6 +136,9 @@ import { ErrorInterceptor } from './error-interceptor';
     CreateQuotaDialogComponent,
     EditQuotaDialogComponent,
     DeleteQuotaDialogComponent,
+    CreateEventDialogComponent,
+    EditEventDialogComponent,
+    DeleteEventDialogComponent,
   ]
 })
 export class AppModule { }

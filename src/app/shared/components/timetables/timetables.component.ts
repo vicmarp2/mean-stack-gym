@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy,
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy,
 } from '@angular/core';
 
 import {
@@ -14,7 +14,7 @@ import {
     isSameWeek,
     startOfWeek
 } from 'date-fns';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import {
     CalendarEvent,
     CalendarEventAction,
@@ -46,10 +46,11 @@ const colors: any = {
   templateUrl: './timetables.component.html',
   styleUrls: ['./timetables.component.css']
 })
-export class TimetablesComponent implements OnInit {
+export class TimetablesComponent implements OnInit, OnDestroy {
 
   activityEvents: Activity['events'];
   events: Array<CalendarEvent>;
+  private eventsSub: Subscription;
 
   view: CalendarView = CalendarView.Week;
   weekStartsOn = new Date().getDay;
@@ -92,7 +93,8 @@ export class TimetablesComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.activitiesService.getAllEvents()
+    this.activitiesService.getAllEvents();
+    this.eventsSub = this.activitiesService.getEventsUpdateListener()
       .subscribe(transformedEventData => {
         this.activityEvents = transformedEventData.events;
         this.activityEvents.forEach((activityEvent) => {
@@ -138,5 +140,9 @@ export class TimetablesComponent implements OnInit {
       }
     });
     this.refresh.next();
+  }
+
+  ngOnDestroy() {
+    this.eventsSub.unsubscribe();
   }
 }

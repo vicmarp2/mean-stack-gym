@@ -5,6 +5,7 @@ import { Activity } from '../models/activity.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Event } from '../models/event.model';
 
 const BACKEND_URL = environment.apiUrl + '/activities';
 
@@ -16,6 +17,8 @@ export class ActivitiesService {
 
   private activities: Activity[] = [];
   private activitiesUpdated = new Subject<{ activities: Activity[] }>();
+  private events: Event[] = [];
+  private eventsUpdated = new Subject<{ events: Event[] }>();
 
   getActivities() {
     return this.http
@@ -49,6 +52,10 @@ export class ActivitiesService {
     return this.activitiesUpdated.asObservable();
   }
 
+  getEventsUpdateListener() {
+    return this.eventsUpdated.asObservable();
+  }
+
   getAllEvents() {
     return this.http
       .get<{ message: string; events: any }>(
@@ -68,7 +75,13 @@ export class ActivitiesService {
             }),
           };
         })
-      );
+      )
+      .subscribe(transformedEventData => {
+        this.events = transformedEventData.events;
+        this.eventsUpdated.next({
+        events: [...this.events],
+      });
+    });
   }
 
   createActivity(activity: any) {
@@ -90,6 +103,31 @@ export class ActivitiesService {
   deleteActivity(id: string) {
     return this.http
       .delete(BACKEND_URL + '/' + id)
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
+
+  createEvent(event: any) {
+    this.http.post<{message: string; event: any }>(BACKEND_URL + '/create/event', {event})
+    .subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  }
+
+  updateEvent(event: Event) {
+    return this.http.put<{ message: string; event: any }>(BACKEND_URL + '/edit/event', { event })
+    .subscribe(result => {
+      console.log(result);
+    });
+  }
+
+
+  deleteEvent(id: string) {
+    return this.http
+      .delete(BACKEND_URL + '/event/' + id)
       .subscribe(result => {
         console.log(result);
       });

@@ -58,6 +58,9 @@ import { ReservationsComponent } from './user/reservations/reservations.componen
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ManageReservationDialogComponent } from './user/reservations/manage-reservation-dialog/manage-reservation-dialog.component';
+import { AdminReservationsComponent } from './admin/admin-reservations/admin-reservations.component';
+import { CreateReservationDialogComponent } from './admin/admin-reservations/create-reservation-dialog/create-reservation-dialog.component';
+import { DeleteReservationDialogComponent } from './admin/admin-reservations/delete-reservation-dialog/delete-reservation-dialog.component';
 
 
 @NgModule({
@@ -103,6 +106,9 @@ import { ManageReservationDialogComponent } from './user/reservations/manage-res
     DeleteEventDialogComponent,
     ReservationsComponent,
     ManageReservationDialogComponent,
+    AdminReservationsComponent,
+    CreateReservationDialogComponent,
+    DeleteReservationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -150,6 +156,8 @@ import { ManageReservationDialogComponent } from './user/reservations/manage-res
     EditEventDialogComponent,
     DeleteEventDialogComponent,
     ManageReservationDialogComponent,
+    CreateReservationDialogComponent,
+    DeleteReservationDialogComponent,
   ]
 })
 export class AppModule { }

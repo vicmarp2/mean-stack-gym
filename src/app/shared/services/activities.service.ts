@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Event } from '../models/event.model';
+import { Reservation } from '../models/reservation.model';
 
 const BACKEND_URL = environment.apiUrl + '/activities';
 
@@ -19,6 +20,8 @@ export class ActivitiesService {
   private activitiesUpdated = new Subject<{ activities: Activity[] }>();
   private events: Event[] = [];
   private eventsUpdated = new Subject<{ events: Event[] }>();
+  private reservations: Reservation[] = [];
+  private reservationsUpdated = new Subject<{reservations: Reservation[] }>();
 
   getActivities() {
     return this.http
@@ -56,6 +59,10 @@ export class ActivitiesService {
     return this.eventsUpdated.asObservable();
   }
 
+  getReservationsUpdateListener() {
+    return this.reservationsUpdated.asObservable();
+  }
+
   getReservationsByUser(userId: string) {
     return this.http
       .get<{ message: string; reservations: any }>(
@@ -75,6 +82,33 @@ export class ActivitiesService {
           };
         })
       );
+  }
+
+  getAllReservations() {
+    return this.http
+    .get<{ message: string; reservations: any }>(
+      `${BACKEND_URL}/reservations/`
+    )
+    .pipe(
+      map(reservationData => {
+        return {
+          reservations: reservationData.reservations.map(reservations => {
+            return {
+              id: reservations._id,
+              user: reservations.user,
+              exactDate: reservations.exactDate,
+              event: reservations.event
+            };
+          }),
+        };
+      })
+    )
+    .subscribe(transformedReservationData => {
+      this.reservations = transformedReservationData.reservations;
+      this.reservationsUpdated.next({
+        reservations: [...this.reservations],
+    });
+  });
   }
 
   getAllEvents() {

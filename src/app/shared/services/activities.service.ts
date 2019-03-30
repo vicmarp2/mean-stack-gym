@@ -56,6 +56,27 @@ export class ActivitiesService {
     return this.eventsUpdated.asObservable();
   }
 
+  getReservationsByUser(userId: string) {
+    return this.http
+      .get<{ message: string; reservations: any }>(
+        `${BACKEND_URL}/reservations/${userId}`
+      )
+      .pipe(
+        map(reservationData => {
+          return {
+            reservations: reservationData.reservations.map(reservations => {
+              return {
+                id: reservations._id,
+                user: reservations.user,
+                exactDate: reservations.exactDate,
+                event: reservations.event
+              };
+            }),
+          };
+        })
+      );
+  }
+
   getAllEvents() {
     return this.http
       .get<{ message: string; events: any }>(
@@ -128,6 +149,23 @@ export class ActivitiesService {
   deleteEvent(id: string) {
     return this.http
       .delete(BACKEND_URL + '/event/' + id)
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
+
+  createReservation(reservation: any) {
+    this.http.post<{message: string; reservation: any }>(BACKEND_URL + '/create/reservation', {reservation})
+    .subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  }
+
+  deleteReservation(id: string) {
+    return this.http
+      .delete(BACKEND_URL + '/reservation/' + id)
       .subscribe(result => {
         console.log(result);
       });

@@ -53,7 +53,7 @@ export class TimetablesComponent implements OnInit, OnDestroy {
   private eventsSub: Subscription;
 
   view: CalendarView = CalendarView.Week;
-  weekStartsOn = new Date().getDay;
+  weekStartsOn = new Date().getDay();
   viewDate: Date = new Date();
 
   actions: CalendarEventAction[] = [
@@ -98,12 +98,19 @@ export class TimetablesComponent implements OnInit, OnDestroy {
       .subscribe(transformedEventData => {
         this.activityEvents = transformedEventData.events;
         this.activityEvents.forEach((activityEvent) => {
+          let dayOfWeek = activityEvent.dayOfWeek;
+          if (activityEvent.dayOfWeek < this.weekStartsOn) {
+            dayOfWeek += 7;
+          }
           this.events.push(
             {
-              start: addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
-              end: addHours(addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
-              activityEvent.endHour - activityEvent.startHour),
-              title: activityEvent.activityName,
+               // start: addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
+               start: addHours(startOfDay(addDays(new Date(), dayOfWeek - this.weekStartsOn)), activityEvent.startHour),
+               // end: addHours(addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
+               // activityEvent.endHour - activityEvent.startHour),
+               end: addHours(addHours(startOfDay(addDays(new Date(), dayOfWeek - this.weekStartsOn)), activityEvent.startHour),
+               activityEvent.endHour - activityEvent.startHour),
+               title: activityEvent.activityName,
             }
           );
         });

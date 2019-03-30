@@ -54,6 +54,10 @@ import { AdminEventsComponent } from './admin/admin-events/admin-events.componen
 import { CreateEventDialogComponent } from './admin/admin-events/dialogs/create-event-dialog/create-event-dialog.component';
 import { EditEventDialogComponent } from './admin/admin-events/dialogs/edit-event-dialog/edit-event-dialog.component';
 import { DeleteEventDialogComponent } from './admin/admin-events/dialogs/delete-event-dialog/delete-event-dialog.component';
+import { ReservationsComponent } from './user/reservations/reservations.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ManageReservationDialogComponent } from './user/reservations/manage-reservation-dialog/manage-reservation-dialog.component';
 
 
 @NgModule({
@@ -97,6 +101,8 @@ import { DeleteEventDialogComponent } from './admin/admin-events/dialogs/delete-
     CreateEventDialogComponent,
     EditEventDialogComponent,
     DeleteEventDialogComponent,
+    ReservationsComponent,
+    ManageReservationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +112,10 @@ import { DeleteEventDialogComponent } from './admin/admin-events/dialogs/delete-
     AngularMaterialModule,
     SharedModule,
     FormsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
     ReactiveFormsModule,
     HttpClientModule,
   ],
@@ -139,6 +149,7 @@ import { DeleteEventDialogComponent } from './admin/admin-events/dialogs/delete-
     CreateEventDialogComponent,
     EditEventDialogComponent,
     DeleteEventDialogComponent,
+    ManageReservationDialogComponent,
   ]
 })
 export class AppModule { }

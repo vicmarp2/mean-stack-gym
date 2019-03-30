@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>{{data.event.title}}</h1>
+<div mat-dialog-content>
+  <p *ngIf="!isReserved">¿Deseas realizar una reserva?</p>
+  <p *ngIf="isReserved">¿Deseas borrar tu reserva?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>Atrás</button>
+  <button mat-button *ngIf="isReserved" color="warn" (click)="onDeleteReserve()" >Borrar</button>
+  <button mat-button *ngIf="!isReserved" color="primary" (click)="onReserve()">Reservar</button>
+
+</div>

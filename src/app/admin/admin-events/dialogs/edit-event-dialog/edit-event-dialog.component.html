@@ -1,22 +1,33 @@
 <h1 mat-dialog-title>Introduce los nuevos datos del evento</h1>
 <div mat-dialog-content>
   <form class="first-form-group">
-      <mat-form-field class="full-width">
-          <input matInput type="text" placeholder="Nombre actividad" #activityNameInput="ngModel" name="activityName" [(ngModel)]="data.event.activityName"
-          required disabled />
-      </mat-form-field>
     <mat-form-field class="full-width">
-      <input matInput type="number" max="23" placeholder="Hora comienzo" #startHourInput="ngModel" name="startHour" [(ngModel)]="data.event.startHour"
-        required />
+      <input matInput type="text" placeholder="Nombre actividad" #activityNameInput="ngModel" name="activityName"
+        [(ngModel)]="data.event.activityName" required disabled />
     </mat-form-field>
     <mat-form-field class="full-width">
-      <input matInput type="number" max="24" placeholder="Hora final" #endHourInput="ngModel" name="endHour" [(ngModel)]="data.event.endHour"
-        required />
+      <mat-select placeholder="Hora comienzo" name="startHour" #startHour [(ngModel)]="data.event.startHour" required>
+        <mat-option *ngFor="let hour of startHours" [value]="hour">
+          {{hour}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field class="full-width">
-        <input matInput type="number" max="7" placeholder="Dia de la semana" #dayOfWeekInput="ngModel" name="dayOfWeek" [(ngModel)]="data.event.dayOfWeek"
-          required />
-      </mat-form-field>
+      <mat-select placeholder="Hora fin" name="endHour" #endHour [(ngModel)]="data.event.endHour" required>
+        <mat-option *ngFor="let hour of endHours" [value]="hour">
+          {{hour}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select placeholder="Dia de la semana" ngModel name="dayOfWeek" #dayOfWeek [(ngModel)]="data.event.dayOfWeek"
+        required>
+        <mat-option *ngFor="let day of daysOfWeek" [value]="day.number">
+          {{day.string}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-error *ngIf="showHourError">La hora de fin debe ser mayor que la de comienzo</mat-error>
   </form>
 </div>
 <div mat-dialog-actions>

@@ -15,10 +15,26 @@ export class CreateEventDialogComponent implements OnInit, OnDestroy {
   activities: Activity[];
   private activitiesSub: Subscription;
 
+  daysOfWeek = [
+    {number: 1, string: 'Lunes'},
+    {number: 2, string: 'Martes'},
+    {number: 3, string: 'Miércoles'},
+    {number: 4, string: 'Jueves'},
+    {number: 5, string: 'Viernes'},
+    {number: 6, string: 'Sábado'},
+    {number: 0, string: 'Domingo'},
+  ];
+  startHours: Array<number> = [];
+  endHours: Array<number> = [];
+  showHourError = false;
   constructor(public dialogRef: MatDialogRef<CreateEventDialogComponent>,
     private activitiesService: ActivitiesService) { }
 
   ngOnInit() {
+    for (let i = 6; i < 22; i++) {
+      this.startHours.push(i);
+      this.endHours.push(i + 1);
+    }
     this.activitiesService.getActivities();
     this.activitiesSub = this.activitiesService.getActivitiesUpdateListener()
       .subscribe(transformedActivitiesData => {
@@ -31,6 +47,11 @@ export class CreateEventDialogComponent implements OnInit, OnDestroy {
   }
 
   onCreateClick() {
+    this.showHourError = false;
+    if (this.event.startHour >= this.event.endHour) {
+      this.showHourError = true;
+      return;
+    }
     const newEvent = {
       ...this.event,
     };

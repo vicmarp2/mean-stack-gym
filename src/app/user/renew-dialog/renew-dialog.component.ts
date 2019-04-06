@@ -33,6 +33,9 @@ export class RenewDialogComponent implements OnInit {
             user = userResult;
             user.quota = this.data.quota;
             user.purchaseDate = addDays(user.endDate, 1);
+            if (new Date() > user.purchaseDate) {
+              user.purchaseDate = new Date();
+            }
             user.endDate = addMonths(user.purchaseDate, this.data.quota.periodInMonths),
             this.userService.updateUser(user, false)
             .subscribe(result => {

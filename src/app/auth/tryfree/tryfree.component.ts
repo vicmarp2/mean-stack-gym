@@ -74,6 +74,7 @@ export class TryfreeComponent implements OnInit, OnDestroy {
           quota: this.quota,
           purchaseDate: new Date(),
           endDate: addWeeks(new Date(), 1),
+          isAdmin: false,
         };
         this.authService.createFreeUser(freeUser);
       });

@@ -20,7 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     AngularMaterialModule,
     AgmCoreModule.forRoot({
-      apiKey : 'AIzaSyA2bsCQwBIZ-UEDOd5VmW3be6-q90L1lBY',
+      apiKey : // google cloud platforms api key
     }),
     GymsRoutingModule,
     SharedModule

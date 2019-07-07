@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Introduce los datos del nuevo curso</h1>
+<div mat-dialog-content>
+  <form class="first-form-group">
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Nombre" #nameInput="ngModel" name="name" [(ngModel)]="course.name" required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Descripción" #descriptionInput="ngModel" name="description" [(ngModel)]="course.description"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Url de imagen" #imageUrlInput="ngModel" name="imageUrl" [(ngModel)]="course.imageUrl"
+        required />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onBackClick()">Atrás</button>
+  <button mat-button color="primary" (click)="onCreateClick()" cdkFocusInitial>Crear</button>
+</div>

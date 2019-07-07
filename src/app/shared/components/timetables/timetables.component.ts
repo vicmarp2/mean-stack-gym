@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy,
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy,
 } from '@angular/core';
 
 import {
@@ -14,7 +14,7 @@ import {
     isSameWeek,
     startOfWeek
 } from 'date-fns';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import {
     CalendarEvent,
     CalendarEventAction,
@@ -46,13 +46,14 @@ const colors: any = {
   templateUrl: './timetables.component.html',
   styleUrls: ['./timetables.component.css']
 })
-export class TimetablesComponent implements OnInit {
+export class TimetablesComponent implements OnInit, OnDestroy {
 
   activityEvents: Activity['events'];
   events: Array<CalendarEvent>;
+  private eventsSub: Subscription;
 
   view: CalendarView = CalendarView.Week;
-  weekStartsOn = new Date().getDay;
+  weekStartsOn = new Date().getDay();
   viewDate: Date = new Date();
 
   actions: CalendarEventAction[] = [
@@ -87,24 +88,33 @@ export class TimetablesComponent implements OnInit {
   //     draggable: true
   //   },
 
-
-
   constructor(private activitiesService: ActivitiesService) {
     this.events = [];
    }
 
   ngOnInit() {
-    this.activityEvents = this.activitiesService.getAllEvents();
-    this.activityEvents.forEach((activityEvent) => {
-      const today = new Date();
-      this.events.push(
-        {
-          start: addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
-          end: addHours(addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
-          activityEvent.endHour - activityEvent.startHour),
-          title: activityEvent.activityName,
-        }
-      );
+    this.activitiesService.getAllEvents();
+    this.eventsSub = this.activitiesService.getEventsUpdateListener()
+      .subscribe(transformedEventData => {
+        this.activityEvents = transformedEventData.events;
+        this.activityEvents.forEach((activityEvent) => {
+          let dayOfWeek = activityEvent.dayOfWeek;
+          if (activityEvent.dayOfWeek < this.weekStartsOn) {
+            dayOfWeek += 7;
+          }
+          this.events.push(
+            {
+               // start: addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
+               start: addHours(startOfDay(addDays(new Date(), dayOfWeek - this.weekStartsOn)), activityEvent.startHour),
+               // end: addHours(addHours(startOfDay(addDays(startOfWeek(new Date()), activityEvent.dayOfWeek)), activityEvent.startHour),
+               // activityEvent.endHour - activityEvent.startHour),
+               end: addHours(addHours(startOfDay(addDays(new Date(), dayOfWeek - this.weekStartsOn)), activityEvent.startHour),
+               activityEvent.endHour - activityEvent.startHour),
+               title: activityEvent.activityName,
+            }
+          );
+        });
+        this.refresh.next();
     });
   }
 
@@ -137,5 +147,9 @@ export class TimetablesComponent implements OnInit {
       }
     });
     this.refresh.next();
+  }
+
+  ngOnDestroy() {
+    this.eventsSub.unsubscribe();
   }
 }

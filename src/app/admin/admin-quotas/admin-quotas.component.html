@@ -1,0 +1,67 @@
+<mat-toolbar>
+    <button mat-icon-button matTooltip="Añadir" (click)="openCreateDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Editar" [disabled]="!selection.hasValue() || multipleSelected()"
+    (click)="openEditDialog()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Eliminar" [disabled]="!selection.hasValue()"
+    (click)="openDeleteDialog()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Búsqueda">
+  </mat-form-field>
+  </mat-toolbar>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Título </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfPayments">
+      <th mat-header-cell *matHeaderCellDef> Nº pagos </th>
+      <td mat-cell *matCellDef="let element"> {{element.numberOfPayments}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pricePerMonth">
+      <th mat-header-cell *matHeaderCellDef> Precio mensual </th>
+      <td mat-cell *matCellDef="let element"> {{element.pricePerMonth}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="periodInMonths">
+      <th mat-header-cell *matHeaderCellDef>Duración en meses</th>
+      <td mat-cell *matCellDef="let element"> {{element.periodInMonths}} </td>
+    </ng-container>
+    <ng-container matColumnDef="isCardNeeded">
+        <th mat-header-cell *matHeaderCellDef>Necesidad tarjeta</th>
+        <td mat-cell *matCellDef="let element"> {{element.isCardNeeded}} </td>
+      </ng-container>
+      <ng-container matColumnDef="cardPrice">
+          <th mat-header-cell *matHeaderCellDef>Precio tarjeta</th>
+          <td mat-cell *matCellDef="let element"> {{element.cardPrice}} </td>
+        </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+  </table>

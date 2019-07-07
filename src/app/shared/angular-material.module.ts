@@ -27,6 +27,7 @@ import {
   MatTooltipModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatTableModule,
 } from '@angular/material';
 
 @NgModule({
@@ -57,6 +58,7 @@ import {
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTableModule,
   ]
 })
 export class AngularMaterialModule {}

@@ -9,8 +9,12 @@ import { TryfreeComponent } from './auth/tryfree/tryfree.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { UserComponent } from './user/user.component';
+import { AuthGuard } from './auth/auth.guard';
+import { SignupGuard } from './auth/signup.guard';
+import { AdminComponent } from './admin/admin.component';
+import { AdminGuard } from './admin/admin.guard';
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'gyms', loadChildren: './gyms/gyms.module#GymsModule'},
   {path: 'courses', component: CoursesComponent},
@@ -19,13 +23,19 @@ const appRoutes: Routes = [
   {path: 'shop', component: ShopComponent},
   {path: 'tryfree', component: TryfreeComponent},
   {path: 'auth/login', component: LoginComponent},
-  {path: 'auth/signup', component: SignupComponent},
-  {path: 'user/:userId', component: UserComponent},
+  {path: 'auth/signup', component: SignupComponent, canActivate: [SignupGuard]},
+  {path: 'user/:userId', component: UserComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: AdminComponent, canActivate: [AdminGuard]},
   {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes,  {preloadingStrategy: PreloadAllModules})],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    AuthGuard,
+    SignupGuard,
+    AdminGuard,
+  ]
 })
 export class AppRoutingModule { }

@@ -1,21 +1,24 @@
 <div class="dark-theme">
   <mat-toolbar class="main-header  mat-elevation-z24" color="primary">
     <mat-toolbar-row>
-      <a routerLink="/" style="width: 14%; min-width: 14%;"><img style="width: 100%;" src="../../../assets/logo/cropped-logo-herca-blanco_fondoblanco_recortado_transparente.png" />
+      <a routerLink="/" style="width: 24%; min-width: 24%;"><img style="width: 100%;" src="../../../assets/logo/IRONSQUAT1_white.png" />
       </a>
       <span class="spacer"></span>
       <ul>
         <li *ngIf="!userIsAuth">
-          <a mat-button routerLink="/auth/login" (click)="userIsAuth=true" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
+          <a id="login" mat-button routerLink="/auth/login" class="login-button" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
         </li>
         <li *ngIf="userIsAuth">
-          <a mat-raised-button routerLink="/user/{{userId}}" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
+          <a mat-raised-button routerLink="/user/{{userId}}" class="user-profile-button" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
+        </li>
+        <li *ngIf="userIsAuth &amp;&amp; userIsAdmin">
+          <a mat-raised-button routerLink="/admin" class="admin-button" routerLinkActive="mat-accent">AREA DE ADMINISTRADOR</a>
         </li>
         <li *ngIf="!userIsAuth">
-          <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">INSCRÍBETE</a>
+          <a mat-raised-button routerLink="/auth/signup" class="signup-button" routerLinkActive="mat-accent">INSCRÍBETE</a>
         </li>
-        <li *ngIf="userIsAuth">
-            <a mat-button (click)="onLogout()">SALIR</a>
+        <li  *ngIf="userIsAuth">
+            <a id="logout" mat-button (click)="onLogout()">SALIR</a>
           </li>
       </ul>
     </mat-toolbar-row>
@@ -34,7 +37,7 @@
           <a>CUOTAS</a>
         </li>
         <li routerLink="/activities/at/any" routerLinkActive="active">
-          <a>ACTIVIDADES</a>
+          <a id="activities">ACTIVIDADES</a>
         </li>
         <li routerLink="/courses" routerLinkActive="active">
           <a>CURSOS</a>

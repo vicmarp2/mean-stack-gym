@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>¿Estás seguro?</h1>
+<div mat-dialog-content>
+  <p>¿Deseas borrar los cursos seleccionados?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>Atrás</button>
+  <button mat-button color="warn" (click)="onDeleteClick()" >Borrar</button>
+</div>

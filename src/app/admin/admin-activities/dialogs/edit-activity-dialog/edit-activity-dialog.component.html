@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Introduce los nuevos datos de la actividad</h1>
+<div mat-dialog-content>
+  <form class="first-form-group">
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Nombre" #nameInput="ngModel" name="name" [(ngModel)]="data.activity.name" required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Descripción" #descriptionInput="ngModel" name="description" [(ngModel)]="data.activity.description"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Url de imagen" #imageUrlInput="ngModel" name="imageUrl" [(ngModel)]="data.activity.imageUrl"
+        required />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onBackClick()">Atrás</button>
+  <button mat-button color="primary" (click)="onEditClick()" cdkFocusInitial>Actualizar</button>
+</div>

@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Introduce los datos del nuevo evento</h1>
+<div mat-dialog-content>
+  <form class="first-form-group">
+    <mat-form-field class="full-width">
+      <mat-select placeholder="Nombre actividad" ngModel name="activityName" #activityName [(ngModel)]="event.activityName"
+        required>
+        <mat-option *ngFor="let activity of activities" [value]="activity.name">
+          {{activity.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select placeholder="Hora comienzo" name="startHour" #startHour [(ngModel)]="event.startHour" required>
+        <mat-option *ngFor="let hour of startHours" [value]="hour">
+          {{hour}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select placeholder="Hora fin" name="endHour" #endHour [(ngModel)]="event.endHour" required>
+        <mat-option *ngFor="let hour of endHours" [value]="hour">
+          {{hour}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select placeholder="Dia de la semana" ngModel name="dayOfWeek" #dayOfWeek [(ngModel)]="event.dayOfWeek"
+        required>
+        <mat-option *ngFor="let day of daysOfWeek" [value]="day.number">
+          {{day.string}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-error *ngIf="showHourError">La hora de fin debe ser mayor que la de comienzo</mat-error>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onBackClick()">Atrás</button>
+  <button mat-button color="primary" (click)="onCreateClick()" cdkFocusInitial>Crear</button>
+</div>

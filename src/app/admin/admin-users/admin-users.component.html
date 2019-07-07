@@ -1,0 +1,95 @@
+<mat-toolbar>
+  <button mat-icon-button matTooltip="Añadir" (click)="openCreateDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Editar" [disabled]="!selection.hasValue() || multipleSelected()"
+  (click)="openEditDialog()">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Eliminar" [disabled]="!selection.hasValue()"
+  (click)="openDeleteDialog()">
+    <mat-icon>delete</mat-icon>
+  </button>
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Búsqueda">
+</mat-form-field>
+</mat-toolbar>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dni">
+    <th mat-header-cell *matHeaderCellDef> DNI </th>
+    <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="surname">
+    <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+    <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+  </ng-container>
+  <ng-container matColumnDef="quota">
+    <th mat-header-cell *matHeaderCellDef> Quota </th>
+    <td mat-cell *matCellDef="let element"> {{element.quota.title}} </td>
+  </ng-container>
+  <ng-container matColumnDef="purchaseDate">
+    <th mat-header-cell *matHeaderCellDef> Fecha de inicio </th>
+    <td mat-cell *matCellDef="let element"> {{element.purchaseDate | date: 'shortDate'}} </td>
+  </ng-container>
+  <ng-container matColumnDef="endDate">
+    <th mat-header-cell *matHeaderCellDef> Fecha de fin</th>
+    <td mat-cell *matCellDef="let element"> {{element.endDate | date: 'shortDate'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="contactNumber">
+    <th mat-header-cell *matHeaderCellDef> Nº contacto </th>
+    <td mat-cell *matCellDef="let element"> {{element.contactNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="birthdate">
+    <th mat-header-cell *matHeaderCellDef> Fecha de nacimiento </th>
+    <td mat-cell *matCellDef="let element"> {{element.birthdate | date: 'shortDate'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef> Dirección </th>
+    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="iban">
+    <th mat-header-cell *matHeaderCellDef> IBAN </th>
+    <td mat-cell *matCellDef="let element"> {{element.iban}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="isAdmin">
+    <th mat-header-cell *matHeaderCellDef> Administrador </th>
+    <td mat-cell *matCellDef="let element"> {{element.isAdmin}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+</table>

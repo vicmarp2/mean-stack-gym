@@ -1,0 +1,33 @@
+"<h1 mat-dialog-title>Introduce los datos de la nueva cuota</h1>
+<div mat-dialog-content>
+  <form class="first-form-group">
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Titulo" #titleInput="ngModel" name="title" [(ngModel)]="quota.title"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Nº pagos" #numberOfPaymentsInput="ngModel" name="numberOfPayments" [(ngModel)]="quota.numberOfPayments"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Precio mensual" #pricePerMonthInput="ngModel" name="pricePerMonth" [(ngModel)]="quota.pricePerMonth"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Duración en meses" #periodInMonthsInput="ngModel" name="periodInMonths" [(ngModel)]="quota.periodInMonths"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Necesidad tarjeta" #isCardNeededInput="ngModel" name="isCardNeeded" [(ngModel)]="quota.isCardNeeded"
+        required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput type="text" placeholder="Precio tarjeta" #cardPriceInput="ngModel" name="cardPrice" [(ngModel)]="quota.cardPrice"
+        required />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onBackClick()">Atrás</button>
+  <button mat-button color="primary" (click)="onCreateClick()" cdkFocusInitial>Crear</button>
+</div>

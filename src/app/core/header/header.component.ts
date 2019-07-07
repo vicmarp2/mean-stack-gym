@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,25 +9,27 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  userIsAuth = true;
-  userId: string = 'dddd';
+  userIsAuth = false;
+  userId: string;
+  userIsAdmin: boolean;
   private authListener: Subscription;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public router: Router) { }
 
   ngOnInit() {
-    // this.userIsAuth = this.authService.getIsAuth();
-    // this.userId = this.authService.getUserId();
-    // this.authListener = this.authService
-    //   .getAuthStatusListener()
-    //   .subscribe(isAuthenticated => {
-    //     this.userIsAuth = isAuthenticated;
-    //     this.userId = this.authService.getUserId();
-    //   });
+    this.userIsAuth = this.authService.getIsAuth();
+    this.userId = this.authService.getUserId();
+    this.userIsAdmin = this.authService.getUserAdmin();
+    this.authListener = this.authService
+      .getAuthStatusListener()
+      .subscribe(isAuthenticated => {
+        this.userIsAuth = isAuthenticated;
+        this.userId = this.authService.getUserId();
+        this.userIsAdmin = this.authService.getUserAdmin();
+      });
   }
 
   onLogout() {
   this.authService.logout();
-  this.userIsAuth = false;
   }
 
   ngOnDestroy() {

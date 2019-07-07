@@ -1,38 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GymsService } from '../gyms.service';
 import { Gym } from '../gym.model';
 import { AgmMarker } from '@agm/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-find-gym',
   templateUrl: './find-gym.component.html',
   styleUrls: ['./find-gym.component.css']
 })
-export class FindGymComponent implements OnInit {
+export class FindGymComponent implements OnInit,  OnDestroy {
   mapLatitude = 40;
   mapLongitude = -3;
   mapZoom = 6.3;
   ICON = {
-    url: '../../../assets/logo/cropped-logo-herca-negro_fondoblanco_recortado_transparente.png',
+    // url: '../../../assets/logo/cropped-logo-herca-negro_fondoblanco_recortado_transparente.png',
+    url: '../../../assets/logo/IRONSQUAT1.png',
     scaledSize: {
-      width: 100,
-      height: 60,
+      width: 150,
+      height: 90,
     },
   };
 
   mapMarkers = new Array<{gym: Gym, icon: any}>();
 
   gyms: Gym[];
-
+  private gymsSub: Subscription;
   constructor(
     private gymsService: GymsService, private route: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.gyms = this.gymsService.getGyms();
-    this.fetchMapMarkers();
+    this.gymsService.getGyms();
+    this.gymsSub = this.gymsService.getGymsUpdateListener()
+      .subscribe(transformedGymData => {
+      this.gyms = transformedGymData.gyms;
+      this.fetchMapMarkers();
+    });
   }
 
   fetchMapMarkers() {
@@ -60,4 +66,8 @@ export class FindGymComponent implements OnInit {
     this.router.navigate(['at', gym.codName], {relativeTo: this.route});
   }
 
+  ngOnDestroy() {
+    this.gymsSub.unsubscribe();
+    // this.authStatusSub.unsubscribe();
+  }
 }

@@ -2,58 +2,74 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Quota } from './quota.model';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
+const BACKEND_URL = environment.apiUrl + '/quotas';
 
 @Injectable({ providedIn: 'root' })
 export class QuotasService {
-  // esto se guardará en la base de datos
-  private quotas: Quota[]  = [
-    {
-      title: 'Bono 1 día',
-      numberOfPayments: 1,
-      pricePerMonth: 5,
-      periodInMonths: 0,
-      isCardNeeded: false,
-      cardPrice: 0,
-    },
-    {
-      title: 'Cuota 1 mes',
-      numberOfPayments: 1,
-      pricePerMonth: 25,
-      periodInMonths: 1,
-      isCardNeeded: true,
-      cardPrice: 10,
-    },
-    {
-      title: 'Cuota 3 meses',
-      numberOfPayments: 3,
-      pricePerMonth: 20,
-      periodInMonths: 3,
-      isCardNeeded: true,
-      cardPrice: 10,
-    },
-    {
-      title: 'Cuota 6 meses',
-      numberOfPayments: 6,
-      pricePerMonth: 15,
-      periodInMonths: 6,
-      isCardNeeded: true,
-      cardPrice: 10,
-    },
-    {
-      title: 'Cuota 12 meses',
-      numberOfPayments: 12,
-      pricePerMonth: 10,
-      periodInMonths: 12,
-      isCardNeeded: true,
-      cardPrice: 10,
-    },
-  ];
+  constructor(private http: HttpClient, private router: Router) {}
 
-  constructor(private router: Router) {}
+  private quotas: Quota[] = [];
+  private quotasUpdated = new Subject<{ quotas: Quota[] }>();
 
   getQuotas() {
-    return [...this.quotas];
+    return this.http
+      .get<{ message: string; quotas: any }>(
+        BACKEND_URL
+      )
+      .pipe(
+        map(quotasData => {
+          return {
+            quotas: quotasData.quotas.map(quotas => {
+              return {
+                id: quotas._id,
+                title: quotas.title,
+                numberOfPayments: quotas.numberOfPayments,
+                pricePerMonth: quotas.pricePerMonth,
+                periodInMonths: quotas.periodInMonths,
+                isCardNeeded: quotas.isCardNeeded,
+                cardPrice: quotas.cardPrice,
+              };
+            }),
+          };
+        })
+      )
+      .subscribe(transformedQuotaData => {
+        this.quotas = transformedQuotaData.quotas;
+        this.quotasUpdated.next({
+        quotas: [...this.quotas],
+      });
+    });
   }
 
+  getQuotasUpdateListener() {
+    return this.quotasUpdated.asObservable();
+  }
+
+  createQuota(quota: any) {
+    this.http.post<{message: string; quota: any }>(BACKEND_URL + '/create', {quota})
+    .subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  }
+
+  updateQuota(quota: Quota) {
+    return this.http.put<{ message: string; quota: any }>(BACKEND_URL + '/edit', { quota })
+    .subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  deleteQuota(id: string) {
+    return this.http
+      .delete(BACKEND_URL + '/' + id)
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
 }

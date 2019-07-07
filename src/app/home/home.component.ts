@@ -11,11 +11,11 @@ export class HomeComponent implements OnInit {
   @ViewChild('slideshow') slideShow: any;
 
   carouselSource = [
-    '../../assets/home/carousel/woman-exercising-in-gym_texto.jpeg',
-    '../../assets/home/carousel/luchador_abs_recortada_texto.jpg',
+    '../../assets/home/carousel/woman-exercising-in-gym.jpeg',
+    '../../assets/home/carousel/luchador_abs_recortada.jpg',
     // '../../assets/home/carousel/rack_pensativo.jpg',
     // '../../assets/home/carousel/salto_comba_recortada.jpg',
-    '../../assets/home/carousel/pesomuerto_barra_texto.jpg',
+    '../../assets/home/carousel/pesomuerto_barra.jpg',
   ];
 
   constructor(private router: Router) {
@@ -31,6 +31,5 @@ export class HomeComponent implements OnInit {
       case 1: this.router.navigate(['/activities/at/any']); break;
       case 2: this.router.navigate(['/tryfree']);
     }
-    console.log(this.slideShow.slideIndex);
   }
 }

@@ -6,19 +6,19 @@
       <span class="spacer"></span>
       <ul>
         <li *ngIf="!userIsAuth">
-          <a mat-button routerLink="/auth/login" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
+          <a id="login" mat-button routerLink="/auth/login" class="login-button" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
         </li>
         <li *ngIf="userIsAuth">
-          <a mat-raised-button routerLink="/user/{{userId}}" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
+          <a mat-raised-button routerLink="/user/{{userId}}" class="user-profile-button" routerLinkActive="mat-accent">AREA DE CLIENTE</a>
         </li>
         <li *ngIf="userIsAuth &amp;&amp; userIsAdmin">
-          <a mat-raised-button routerLink="/admin" routerLinkActive="mat-accent">AREA DE ADMINISTRADOR</a>
+          <a mat-raised-button routerLink="/admin" class="admin-button" routerLinkActive="mat-accent">AREA DE ADMINISTRADOR</a>
         </li>
         <li *ngIf="!userIsAuth">
-          <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">INSCRÍBETE</a>
+          <a mat-raised-button routerLink="/auth/signup" class="signup-button" routerLinkActive="mat-accent">INSCRÍBETE</a>
         </li>
-        <li *ngIf="userIsAuth">
-            <a mat-button (click)="onLogout()">SALIR</a>
+        <li  *ngIf="userIsAuth">
+            <a id="logout" mat-button (click)="onLogout()">SALIR</a>
           </li>
       </ul>
     </mat-toolbar-row>
@@ -37,7 +37,7 @@
           <a>CUOTAS</a>
         </li>
         <li routerLink="/activities/at/any" routerLinkActive="active">
-          <a>ACTIVIDADES</a>
+          <a id="activities">ACTIVIDADES</a>
         </li>
         <li routerLink="/courses" routerLinkActive="active">
           <a>CURSOS</a>

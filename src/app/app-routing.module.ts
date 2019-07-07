@@ -14,7 +14,7 @@ import { SignupGuard } from './auth/signup.guard';
 import { AdminComponent } from './admin/admin.component';
 import { AdminGuard } from './admin/admin.guard';
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'gyms', loadChildren: './gyms/gyms.module#GymsModule'},
   {path: 'courses', component: CoursesComponent},

@@ -26,7 +26,10 @@ export class AuthService {
     return this.token;
   }
 
-  getIsAuth() {
+  setIsAuth(auth: boolean) {
+    this.isAuthenticated = auth;
+  }
+  public getIsAuth() {
     return this.isAuthenticated;
   }
 
@@ -34,7 +37,7 @@ export class AuthService {
     return this.userId;
   }
 
-  getUserAdmin() {
+  public getUserAdmin() {
     return this.userAdmin;
   }
   getAuthStatusListener() {
@@ -138,7 +141,7 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, userId: string, userAdmin: boolean) {
+  public saveAuthData(token: string, expirationDate: Date, userId: string, userAdmin: boolean) {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
     localStorage.setItem('userId', userId);
